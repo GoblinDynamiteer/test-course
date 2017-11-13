@@ -39,7 +39,6 @@ void print_program_title(void);
 bool get_user_input_fahrenheit(double * temp);
 bool get_user_input_yes_no(void);
 bool str_to_dbl(char * string, double * value);
-void run_tests(void);
 
 int main(int argc, char const *argv[])
 {
