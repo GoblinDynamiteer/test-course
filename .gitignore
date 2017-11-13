@@ -9,6 +9,7 @@ GCC/
 *.swp
 *~.nib
 *.exe
+*.o
 local.properties
 .settings/
 .loadpath
