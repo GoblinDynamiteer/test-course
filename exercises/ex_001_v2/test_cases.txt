@@ -1,0 +1,13 @@
+Testfall
+01: 32°F = 0°C
+02: 212°F = 100°C
+03: Mata in en bokstav istället för en siffra
+04: 73.5 °F = 23.1 °C (obs rätt antal decimaler)
+05: 400 °F = 204.4 °C (obs rätt antal decimaler)
+06: Antalet =-tecken = 20
+07: å och ä saknas
+08: Blir det fortfarande rätt om ni matar in , istället för punkt?
+09: Går det köra programmet flera gånger? (fungerar både j och J? )
+10: Rensas skärmen mellan varje körning?
+11: Är koden kommenterad?
+12: Är koden uppdelad i funktioner?
