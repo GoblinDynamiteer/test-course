@@ -1,18 +1,19 @@
 TARGET = dumbTest
 LIBS =
-UNITYPATH = unity/src/
+UNITYPATH = C:/Kod/unity/src/
 CC = gcc
 SRC_EXT = c
 OBJ_EXT = o
 CFLAGS = -g -Wall
-SRC = $(wildcard *.$(SRC_EXT)) $(UNITYPATH)unity.c
+#SOURCES = $(wildcard *.cpp) $(wildcard */*.cpp)
+SRC = $(wildcard *.$(SRC_EXT)) $(wildcard $(UNITYPATH)*.$(SRC_EXT))
 OBJ = $(SRC:.$(SRC_EXT)=.$(OBJ_EXT))
 
 #Remove executable -> build -> run
 all: cleantarget link run
 
 compile:
-	$(CC) $(SRC) $(UNITYPATH)unity.c -o $(TARGET)
+	$(CC) $(SRC) -I $(UNITYPATH) -o $(TARGET)
 
 link: $(OBJ)
 	$(CC) $(OBJ) -o $(TARGET) $(LIBS)

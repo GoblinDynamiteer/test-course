@@ -1,4 +1,4 @@
-#include "unity/src/unity.h"
+#include "../../../unity/src/unity.h"
 #include "DumbExample.h"
 
 void test_AverageThreeBytes_should_AverageMidRangeValues(void)
