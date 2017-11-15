@@ -1,6 +1,6 @@
 TARGET = dumbTest
 LIBS =
-UNITYPATH = c:/kod/unity/src/
+UNITYPATH = ../../../unity/src/
 CC = gcc
 SRC_EXT = c
 OBJ_EXT = o
