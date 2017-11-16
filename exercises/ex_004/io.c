@@ -1,5 +1,12 @@
 #include "io.h"
 
+unit units[3];
+
+void init_io(void)
+{
+    units[UNIT_VOLTAGE].max_value = 230;
+}
+
 /* Generate and display main menu */
 void output_display_main_menu(void)
 {

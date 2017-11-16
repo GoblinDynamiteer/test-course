@@ -8,7 +8,7 @@ SRC = $(wildcard *.$(SRC_EXT))
 OBJ = $(SRC:.$(SRC_EXT)=.$(OBJ_EXT))
 
 #Remove executable -> build -> run
-all: cleantarget link run
+all: cleantarget link #run
 
 compile:
 	$(CC) hello.c main.c world.c -o $(TARGET)

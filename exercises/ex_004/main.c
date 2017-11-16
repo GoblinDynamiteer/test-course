@@ -32,6 +32,7 @@ int main()
 {
     system("chcp 1252");
     system("cls");
+    init_io();
     bool exit = false;
     int val;
 
