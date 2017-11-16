@@ -79,8 +79,7 @@ int main()
             printf("Resistans sammankopplade i parallella kretsar är lika med 1 delat Resistans R total är lika med\n");
             printf("Resistans 1/R1 + 1/R2 + 1/R3 då vi högst använder tre resistanser.\n\n");
             double r1,r2,r3;
-            printf("Skriv resistans R1 < 20 000ohm: \n ");
-            scanf("%lf", &r1);
+            r1 = input_get_unit_value(UNIT_RESISTANCE, 1);
             if(r1 > 20000)
             {
                 printf("För högt värde, försök igen: \n");
@@ -109,8 +108,8 @@ int main()
             printf("Effektlagen enkel för likström är effekten P i Watt (W) lika med spänningen U i volt(V)\n");
             printf("gånger strömmen I i Ampere(A): \n\n");
             double u, i;
-            printf("Skriv spännngen U i volt(V): \n ");
-            scanf("%lf", &u);
+            //printf("Skriv spännngen U i volt(V): \n ");
+            u = input_get_unit_value(UNIT_VOLTAGE, 0);
             printf("Skriv ström Ampere I < 440A: \n");
             scanf("%lf", &i);
             if(i > 440)
