@@ -21,9 +21,10 @@ enum
 
 enum
 {
-    UNIT_VOLTAGE,
-    UNIT_RESISTANCE,
+    VOLTAGE,
+    RESISTANCE,
     UNIT_CURRENT,
+    COS,
     NO_UNIT
 };
 
@@ -31,15 +32,15 @@ typedef struct
 {
     char name[20];          // eg 'Spänning'
     char value_name[20];    // eg 'Volt'
+    char value_char[5];     // eg 'V'
     char si_char;           // eg 'U'
-    char value_char[5];        // eg 'V'
     int max_value;          // eg '230'
     int min_value;          // eg '0'
 }struct_unit_info;
 
 /* Function prototypes */
-void init_io(void);
 void output_display_main_menu(void);
+void output_display_selection_info(int menu_item);
 int input_main_menu_user_selection(void);
 double input_get_unit_value(int type, int n);
 

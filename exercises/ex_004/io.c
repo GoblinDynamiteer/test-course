@@ -3,31 +3,13 @@
 #include <string.h>
 #include <stdlib.h> // itoa
 
-struct_unit_info unit_type_info[3];
-
-void init_io(void)
+struct_unit_info unit_type_info[4] =
 {
-    strcpy(unit_type_info[UNIT_VOLTAGE].name, "spänning");
-    strcpy(unit_type_info[UNIT_VOLTAGE].value_name, "volt");
-    strcpy(unit_type_info[UNIT_VOLTAGE].value_char, "V");
-    unit_type_info[UNIT_VOLTAGE].si_char = 'U';
-    unit_type_info[UNIT_VOLTAGE].max_value = 230;
-    unit_type_info[UNIT_VOLTAGE].min_value = 0;
-
-    strcpy(unit_type_info[UNIT_CURRENT].name, "ström");
-    strcpy(unit_type_info[UNIT_CURRENT].value_name, "ampere");
-    strcpy(unit_type_info[UNIT_CURRENT].value_char, "A");
-    unit_type_info[UNIT_CURRENT].si_char = 'I';
-    unit_type_info[UNIT_CURRENT].max_value = 440;
-    unit_type_info[UNIT_CURRENT].min_value = 0;
-
-    strcpy(unit_type_info[UNIT_RESISTANCE].name, "resistans");
-    strcpy(unit_type_info[UNIT_RESISTANCE].value_name, "ohm");
-    strcpy(unit_type_info[UNIT_RESISTANCE].value_char, "ohm");
-    unit_type_info[UNIT_RESISTANCE].si_char = 'R';
-    unit_type_info[UNIT_RESISTANCE].max_value = 20000;
-    unit_type_info[UNIT_RESISTANCE].min_value = 0;
-}
+    {"spänning", "volt", "V", 'U', 230, 0},
+    {"ström", "ampere", "A", 'I', 440, 0},
+    {"resistans", "ohm", "ohm", 'R', 20000, 0},
+    {"effektfaktor", "cos", "cos", 'e', 1, 0},
+};
 
 /* Generate and display main menu */
 void output_display_main_menu(void)
@@ -51,8 +33,27 @@ void output_display_main_menu(void)
 
     for(int i = 0; i < MENU_OPTION_MAX; i++)
     {
-        printf("Välj %d för: %s\n", (i + 1), string_menu_option[i]);
+        printf("Välj %d för: %s\n", (i + 1),
+            string_menu_option[i]);
     }
+}
+
+void output_display_selection_info(int menu_item)
+{
+    static const char * string_menu_help[] =
+    {
+        "Ohms lag spänningen(volt/V) betäckning U "
+        "lika med Resistansen(Ohm) betäckning R \n"
+        "gånger Strömmen(Ampere) med betäckningen I. "
+        "Kort U=R*I. \n\n",
+
+        "Resistans sammankopplade i parallella kretsar är "
+        "lika med 1 delat Resistans R total är lika med\n"
+        "Resistans 1/R1 + 1/R2 + 1/R3 då vi högst använder "
+        "tre resistanser.\n\n"
+    };
+
+    printf(string_menu_help[menu_item]);
 }
 
 /* Get user input for menu selection, should be numeric */
@@ -66,9 +67,9 @@ int input_main_menu_user_selection(void)
     /* Scan string to integer */
     if(sscanf(input_string, "%d", &menu_item_selection) == 1)
     {
-        return (menu_item_selection <= MENU_OPTION_MAX &&
+        return (menu_item_selection < MENU_OPTION_MAX &&
                 menu_item_selection > 0 ?
-                menu_item_selection : INPUT_MENU_OPTION_ERROR);
+                menu_item_selection - 1: INPUT_MENU_OPTION_ERROR);
     }
 
     return INPUT_MENU_OPTION_ERROR;

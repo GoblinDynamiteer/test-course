@@ -32,54 +32,40 @@ int main()
 {
     system("chcp 1252");
     system("cls");
-    init_io();
-    bool exit = false;
     int val;
 
-    while (exit == false)
+    while(1)
     {
         output_display_main_menu();
         val = input_main_menu_user_selection();
 
-        /* Userer entered invalid menu option */
+        /* User entered invalid menu option */
         while(val == INPUT_MENU_OPTION_ERROR)
         {
             printf("Fel alternativ försök igen!: \n");
             val = input_main_menu_user_selection();
         }
 
-        if(val == 1)
+        printf("val: %d\n", val);
+        printf("quit: %d\n", MENU_OPTION_QUIT);
+
+        if(val == MENU_OPTION_QUIT)
         {
-
-            printf("Ohms lag spänningen(volt/V) betäckning U lika med Resistansen(Ohm) betäckning R \n");
-            printf("gånger Strömmen(Ampere) med betäckningen I. Kort U=R*I. \n\n");
-            double r, i;
-            printf("Skriv resistans R < 20 000ohm: \n ");
-            scanf("%lf", &r);
-            if(r > 20000)
-            {
-                printf("För högt värde, försök igen: \n");
-                continue;
-            }
-
-            printf("Skriv ström I < 440 Ampere: \n");
-            scanf("%lf", &i);
-            if(i > 440)
-            {
-                printf("För högt värde, försök igen: \n");
-                continue;
-            }
-
-            printf("%f V\n", ohms_lag(r, i));
-
+            printf("SKA AVLSUTA!!!!");
+            return 0;
         }
 
-        else if(val == 2)
+        output_display_selection_info(val);
+        printf("%f V\n", formula_handler(val));
+    }
+}
+/*
+        return 0;
+        if(val == 2)
         {
-            printf("Resistans sammankopplade i parallella kretsar är lika med 1 delat Resistans R total är lika med\n");
-            printf("Resistans 1/R1 + 1/R2 + 1/R3 då vi högst använder tre resistanser.\n\n");
+
             double r1,r2,r3;
-            r1 = input_get_unit_value(UNIT_RESISTANCE, 1);
+            r1 = input_get_unit_value(RESISTANCE, 1);
             if(r1 > 20000)
             {
                 printf("För högt värde, försök igen: \n");
@@ -109,7 +95,7 @@ int main()
             printf("gånger strömmen I i Ampere(A): \n\n");
             double u, i;
             //printf("Skriv spännngen U i volt(V): \n ");
-            u = input_get_unit_value(UNIT_VOLTAGE, 0);
+            u = input_get_unit_value(VOLTAGE, 0);
             printf("Skriv ström Ampere I < 440A: \n");
             scanf("%lf", &i);
             if(i > 440)
@@ -216,7 +202,7 @@ int main()
         {
             exit = true;
         }
-    }
+
 
     return 0;
-}
+} */
