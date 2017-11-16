@@ -33,15 +33,19 @@ int main()
     system("chcp 1252");
     system("cls");
     bool exit = false;
+    int val;
 
     while (exit == false)
     {
-        printf("\n");
-        int val;
-
         output_display_main_menu();
+        val = input_main_menu_user_selection();
 
-        scanf("%d", &val);
+        /* Userer entered invalid menu option */
+        while(val == INPUT_MENU_OPTION_ERROR)
+        {
+            printf("Fel alternativ försök igen!: \n");
+            val = input_main_menu_user_selection();
+        }
 
         if(val == 1)
         {
@@ -211,10 +215,6 @@ int main()
         else if (val == 0)
         {
             exit = true;
-        }
-        else
-        {
-            printf("Fel alternativ försök igen!: \n");
         }
     }
 

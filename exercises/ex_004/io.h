@@ -3,22 +3,10 @@
 
 #include <stdio.h>
 
-const char * string_menu_title =
-    "Välj vilka storheter du vill beräkna:";
+#define INPUT_CHAR_BUFFER_SIZE 200
+#define INPUT_MENU_OPTION_ERROR -1
 
-const char * string_menu_option[] =
-{
-    "OHMS LAG",
-    "Rtot",
-    "EFFEKTLAGEN ENKEL",
-    "SKENBAR EFFEKT ENFAS",
-    "AKTIV EFFEKT/MEDELEFFEKT ENFAS",
-    "SKENBAR EFFEKT 3-FAS",
-    "AKTIV EFFEKT 3-FAS",
-    "FÖR ATT AVSLUTA"
-};
-
-static enum
+enum
 {
     MENU_OPTION_OHMS_LAW,
     MENU_OPTION_RTOT,
@@ -30,7 +18,8 @@ static enum
     MENU_OPTION_MAX
 };
 
-/* Funktion prototypes */
+/* Function prototypes */
 void output_display_main_menu(void);
+int input_main_menu_user_selection(void);
 
 #endif
