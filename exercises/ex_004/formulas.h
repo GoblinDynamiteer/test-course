@@ -1,6 +1,8 @@
 #ifndef FORMULAS_H
 #define FORMULAS_H
 
+#include <math.h>
+
 /* Function prototypes */
 double ohms_lag(double r, double i);
 double res_tot(double r1, double r2, double r3);
