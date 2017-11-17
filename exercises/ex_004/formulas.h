@@ -3,18 +3,7 @@
 
 #include <math.h>
 
-enum
-{
-    OHMS_LAW,
-    RTOT,
-    EFFECT_CALC_SIMPLE,
-    EFFECT_CALC_ONE_PHASE,
-    APPARANT_POWER_ONE_PHASE,
-    REAL_POWER_THREE_PHASE,
-    APPARANT_POWER_THREE_PHASE,
-    MAX_FORMULAS = 7
-};
-
+/* Function pointers to formula calculations */
 typedef double (*formula_func2)(double, double);
 typedef double (*formula_func3)(double, double, double);
 
