@@ -1,37 +1,24 @@
 #include "formulas.h"
 #include "io.h"
 
-/* Args, units used in formula, formula function (2 or 3 args) */
-struct_formula formula_info[] =
-{
-    {2, {RESISTANCE, CURRENT}, formula_ohms_law, NULL},
-    {3, {RESISTANCE, RESISTANCE, RESISTANCE}, NULL, formula_rtot},
-    {2, {VOLTAGE, CURRENT}, formula_effect_simple, NULL},
-    {2, {VOLTAGE, CURRENT}, formula_apparent_power, NULL},
-    {3, {VOLTAGE, CURRENT, COS}, NULL, formula_actual_power},
-    {2, {VOLTAGE, CURRENT}, formula_apparent_power_three_phase, NULL},
-    {3, {VOLTAGE, CURRENT, COS}, NULL, formula_actual_power_three_phase}
-};
-
 /* Uses formula functions to calculate value */
-double formula_handler(int type)
+double formula_handler(formula_info * f, unit_info * u)
 {
     double value[3];
-    printf("Got type %d\n", type);
 
-    for(int i = 0; i < formula_info[type].args; i++)
+    for(int i = 0; i < f->input_count; i++)
     {
         value[i] = input_get_unit_value(
-            formula_info[type].input_types[i],
-            (type == RTOT ? i + 1 : 0));
+            &u[f->input[i]],
+            (f->id == RTOT ? i + 1 : 0));
     }
 
-    if(formula_info[type].args == 3)
+    if(f->input_count == 3)
     {
-        return formula_info[type].formula3(value[0], value[1], value[2]);
+        return f->formula3(value[0], value[1], value[2]);
     }
 
-    return formula_info[type].formula2(value[0], value[1]);
+    return f->formula2(value[0], value[1]);
 }
 
 double formula_ohms_law(double r, double i)

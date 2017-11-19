@@ -3,14 +3,6 @@
 #include <string.h>
 #include <stdlib.h> // itoa
 
-struct_unit_info unit_type_info[4] =
-{
-    {"spänning", "volt", "V", 'U', 230, 0},
-    {"resistans", "ohm", "ohm", 'R', 20000, 0},
-    {"ström", "ampere", "A", 'I', 440, 0},
-    {"effektfaktor", "cos", "cos", 'e', 1, 0},
-};
-
 /* Generate and display main menu */
 void output_display_main_menu(void)
 {
@@ -33,7 +25,8 @@ void output_display_main_menu(void)
 
     for(int i = 0; i < MENU_ITEMS_MAX; i++)
     {
-        printf("Välj %d för: %s\n", (i + 1),
+        printf("Välj %d för: %s\n",
+            i == QUIT_PROGRAM ? 0 : (i + 1),
             string_menu_option[i]);
     }
 }
@@ -88,7 +81,6 @@ int input_main_menu_user_selection(void)
     /* Scan string to integer */
     if(sscanf(input_string, "%d", &menu_item_selection) == 1)
     {
-        menu_item_selection--;
         return (menu_item_selection < MENU_ITEMS_MAX &&
                 menu_item_selection >= 0 ?
                 menu_item_selection: INPUT_MENU_OPTION_ERROR);
@@ -99,9 +91,8 @@ int input_main_menu_user_selection(void)
 
 /*  User input for unit value, eg current,
     resistance or voltage */
-double input_get_unit_value(int type, int n)
+double input_get_unit_value(unit_info * s, int n)
 {
-    printf("Got type: %d\n", type);
     char input_string[INPUT_CHAR_BUFFER_SIZE];
     char number[3];
     double input_value;
@@ -113,14 +104,15 @@ double input_get_unit_value(int type, int n)
         */
 
     printf("Skriv %s %c%s i %s(%s) < %d%s: \n",
-        unit_type_info[type].name,             // 'spänning', 'ström'
-        unit_type_info[type].si_char,          // U, I
-        n ? itoa(n, number, 10) : "",          // R1, R2 ...
-        unit_type_info[type].value_name,       // 'Volt', 'Ampere'
-        unit_type_info[type].value_char,       // 'V', 'A'
-        unit_type_info[type].max_value,        // Max value
-        unit_type_info[type].value_char        // 'V', 'A'
+        s->name,                        // 'spänning', 'ström'
+        s->si_char,                     // U, I
+        n ? itoa(n, number, 10) : "",   // R1, R2 ...
+        s->value_name,                  // 'Volt', 'Ampere'
+        s->value_char,                  // 'V', 'A'
+        s->max_value,                   // Max value
+        s->value_char                   // 'V', 'A'
     );
+
 
     do
     {
@@ -128,13 +120,13 @@ double input_get_unit_value(int type, int n)
         fgets(input_string, INPUT_CHAR_BUFFER_SIZE, stdin);
         sscanf(input_string, "%lf", &input_value);
 
-        if(input_value > unit_type_info[type].max_value)
+        if(input_value > s->max_value)
         {
             correct_input = false;
             printf("För högt värde, försök igen: \n");
         }
 
-        if(input_value < unit_type_info[type].min_value)
+        if(input_value < s->min_value)
         {
             correct_input = false;
             printf("För lågt värde, försök igen: \n");
