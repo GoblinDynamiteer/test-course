@@ -3,7 +3,9 @@
 #include <string.h>
 #include <stdlib.h> // itoa
 
-/* Generate and display main menu */
+/**
+ * Print main menu.
+ */
 void output_display_main_menu(void)
 {
     static const char * string_menu_title =
@@ -26,13 +28,15 @@ void output_display_main_menu(void)
     for(int i = 0; i < MENU_ITEMS_MAX; i++)
     {
         printf("Välj %d för: %s\n",
-            i == QUIT_PROGRAM ? 0 : (i + 1),
+            i == QUIT_PROGRAM ? 0 : (i + 1), // Exit is menu option 0
             string_menu_option[i]);
     }
 }
 
-/* Print info about chosen formula */
-void output_display_selection_info(int menu_item)
+/**
+ * Print information about formula.
+ */
+void output_display_formula_info(int menu_item)
 {
     static const char * string_menu_help[] =
     {
@@ -70,7 +74,10 @@ void output_display_selection_info(int menu_item)
     printf(string_menu_help[menu_item]);
 }
 
-/* Get user input for menu selection, should be numeric */
+/**
+ * Handles user input, for menu choice
+ * @return User menu item selection, as a number
+ */
 int input_main_menu_user_selection(void)
 {
     char input_string[INPUT_CHAR_BUFFER_SIZE];
@@ -81,6 +88,7 @@ int input_main_menu_user_selection(void)
     /* Scan string to integer */
     if(sscanf(input_string, "%d", &menu_item_selection) == 1)
     {
+        /* Return user entered value. If not in menu range, return error */
         return (menu_item_selection < MENU_ITEMS_MAX &&
                 menu_item_selection >= 0 ?
                 menu_item_selection: INPUT_MENU_OPTION_ERROR);
@@ -89,50 +97,92 @@ int input_main_menu_user_selection(void)
     return INPUT_MENU_OPTION_ERROR;
 }
 
-/*  User input for unit value, eg current,
-    resistance or voltage */
+/**
+ * Handles user input, for setting unit value
+ * @param s pointer to unit information struct
+ * @param n Number after SI-value, pass 0 for none.
+ *          example: R1 R2 R3 or U
+ */
 double input_get_unit_value(unit_info * s, int n)
 {
     char input_string[INPUT_CHAR_BUFFER_SIZE];
-    char number[3];
     double input_value;
     bool correct_input;
 
-    /* FIX CORRECT OUTPUT
-        Skriv in effektfaktorn cos > 0 && cos < 1
-        Skriv resistans R2 < 20 000ohm:
-        */
-
-    printf("Skriv %s %c%s i %s(%s) < %d%s: \n",
-        s->name,                        // 'spänning', 'ström'
-        s->si_char,                     // U, I
-        n ? itoa(n, number, 10) : "",   // R1, R2 ...
-        s->value_name,                  // 'Volt', 'Ampere'
-        s->value_char,                  // 'V', 'A'
-        s->max_value,                   // Max value
-        s->value_char                   // 'V', 'A'
-    );
-
+    /* Display text: Ask user for input */
+    output_ask_for_unit_value_input(s, n);
 
     do
     {
         correct_input = true;
         fgets(input_string, INPUT_CHAR_BUFFER_SIZE, stdin);
-        sscanf(input_string, "%lf", &input_value);
+
+        /* Scan input to input_value */
+        if(sscanf(input_string, "%lf", &input_value) != 1)
+        {
+            correct_input = false;
+            printf(STRING_ERROR_INPUT_GENERAL "\n");
+            continue;
+        }
 
         if(input_value > s->max_value)
         {
             correct_input = false;
-            printf("För högt värde, försök igen: \n");
+            printf(STRING_ERROR_INPUT_HIGH_VALUE "\n");
         }
 
         if(input_value < s->min_value)
         {
             correct_input = false;
-            printf("För lågt värde, försök igen: \n");
+            printf(STRING_ERROR_INPUT_LOW_VALUE "\n");
         }
 
-    } while(!correct_input);
+    } while(!correct_input); // Repeat while incorrect user input
 
     return input_value;
+}
+
+/**
+ * Asks user to enter unit value
+ * @param s pointer to unit information struct
+ * @param n Number after SI-value, pass 0 for none.
+            example: R1 R2 R3 or U
+ */
+void output_ask_for_unit_value_input(unit_info * s, int n)
+{
+    char number[3];
+    char char_parantheses[5];
+
+    if(s->id == COS)
+    {
+        printf("Skriv %s %s > %d && < %d: \n ",
+            s->name,
+            s->value_name,
+            s->max_value,
+            s->min_value);
+
+        /* Exit function */
+        return;
+    }
+
+    sprintf(char_parantheses, " (%s)", s->value_char);
+
+    printf("Skriv %s %c%s i %s%s < %d%s: \n ",
+        s->name,                                     // 'spänning', 'ström'
+        s->si_char,                                  // U, I
+        n ? itoa(n, number, 10) : "",                // R1, R2 ...
+        s->value_name,                               // 'Volt', 'Ampere'
+        s->id != RESISTANCE ? char_parantheses : "", // 'V', 'A'
+        s->max_value,                                // Max value
+        s->value_char                                // 'V', 'A'
+    );
+}
+
+/**
+ * Clears terminal screen and sets code page to 1252
+ */
+void output_clear_screen(void)
+{
+    system("chcp 1252");
+    system("cls");
 }
