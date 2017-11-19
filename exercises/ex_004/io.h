@@ -16,7 +16,7 @@
 /* Function prototypes */
 void output_display_main_menu(formula_info * f, int n);
 void output_display_formula_info(formula_info * f);
-int input_main_menu_user_selection(int n)
+int input_main_menu_user_selection(int n);
 double input_get_unit_value(unit_info * s, int n);
 void output_clear_screen(void);
 void output_ask_for_unit_value_input(unit_info * s, int n);

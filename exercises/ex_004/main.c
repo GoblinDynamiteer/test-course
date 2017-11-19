@@ -117,8 +117,7 @@ int main()
     while(1)
     {
         output_display_main_menu(
-            formula_info, formula_info_size)
-        );
+            formula_info, formula_info_size);
         user_menu_choice = input_main_menu_user_selection(
             formula_info_size);
 
