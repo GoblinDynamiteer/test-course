@@ -19,9 +19,23 @@ enum
     VOLT_AMPERE
 };
 
+enum
+{
+    OHMS_LAW,
+    RTOT,
+    RTOT_SERIES,
+    POWER_CALC,
+    APPARANT_POWER_ONE_PHASE,
+    REAL_POWER_ONE_PHASE,
+    APPARANT_POWER_THREE_PHASE,
+    REAL_POWER_THREE_PHASE,
+};
+
 typedef struct _struct_formula_info
 {
     int id;
+    char name[50];
+    char info[1000];
     int input_count;
     unit_type input[3];
     unit_type output;
@@ -49,5 +63,6 @@ double formula_apparent_power(double u, double i);
 double formula_actual_power(double u, double i, double cos);
 double formula_apparent_power_three_phase(double u, double i);
 double formula_actual_power_three_phase(double u, double i, double cos);
+double formula_rtot_series(double r1, double r2, double r3);
 
 #endif

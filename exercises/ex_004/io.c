@@ -5,80 +5,37 @@
 
 /**
  * Print main menu.
+ * @param n Size of formula info struct array
  */
-void output_display_main_menu(void)
+void output_display_main_menu(formula_info * f, int n)
 {
-    static const char * string_menu_title =
-        "Välj vilka storheter du vill beräkna:";
+    printf("\nVälj vilka storheter du vill beräkna:\n");
 
-    static const char * string_menu_option[] =
-    {
-        "OHMS LAG",
-        "Rtot",
-        "EFFEKTLAGEN ENKEL",
-        "SKENBAR EFFEKT ENFAS",
-        "AKTIV EFFEKT/MEDELEFFEKT ENFAS",
-        "SKENBAR EFFEKT 3-FAS",
-        "AKTIV EFFEKT 3-FAS",
-        "FÖR ATT AVSLUTA"
-    };
-
-    printf("\n%s\n", string_menu_title);
-
-    for(int i = 0; i < MENU_ITEMS_MAX; i++)
+    for(int i = 0; i < n; i++)
     {
         printf("Välj %d för: %s\n",
-            i == QUIT_PROGRAM ? 0 : (i + 1), // Exit is menu option 0
-            string_menu_option[i]);
+            (i + 1),
+            f[i].name);
     }
+
+    printf("Välj %d för: FÖR ATT AVSLUTA\n",
+        INPUT_MENU_OPTION_QUIT);
 }
 
 /**
  * Print information about formula.
  */
-void output_display_formula_info(int menu_item)
+void output_display_formula_info(formula_info * f)
 {
-    static const char * string_menu_help[] =
-    {
-        "Ohms lag spänningen(volt/V) betäckning U "
-        "lika med Resistansen(Ohm) betäckning R \n"
-        "gånger Strömmen(Ampere) med betäckningen I. "
-        "Kort U=R*I. \n\n",
-
-        "Resistans sammankopplade i parallella kretsar är "
-        "lika med 1 delat Resistans R total är lika med\n"
-        "Resistans 1/R1 + 1/R2 + 1/R3 då vi högst använder "
-        "tre resistanser.\n\n",
-
-        "Effektlagen enkel för likström är effekten P i Watt (W)"
-        "lika med spänningen U i volt(V)\n"
-        "gånger strömmen I i Ampere(A): \n\n",
-
-        "Skenbar effekt enfas räknas med storheten VA(VoltAmpere)"
-        "som är lika med spänningen U i volt(V)\n"
-        "gånger strömmen I i ampere(A)\n\n",
-
-        "Aktiv medelefdekt enfas är lika med effekt P i watt(W)"
-        "lika med spänningen U i volt(V) gånger strömmen I \n"
-        "i Ampere gånger cosinus fi/efkektfaktor < 1:\n\n",
-
-        "3-fas skenbar effekt är växelspänning är skenbar effekt S "
-        "i voltampere(VA) lika med spänningen U i volt(V) \n"
-        "gånger strömmen I i ampere(A) gånger roten ur 3 SQRT(3).\n\n",
-
-        "3-fas aktiv effekt är effekten P i Watt(W) lika med spänningen"
-        "U i volt(V) gånger strömmen I i ampere(A)\n"
-        "gånger cos < 1 && cos > 0 gånger roten ur 3 SQRT(3).\n\n"
-    };
-
-    printf(string_menu_help[menu_item]);
+    printf(f->info);
 }
 
 /**
  * Handles user input, for menu choice
+ * @param n Size of formula info struct array
  * @return User menu item selection, as a number
  */
-int input_main_menu_user_selection(void)
+int input_main_menu_user_selection(int n)
 {
     char input_string[INPUT_CHAR_BUFFER_SIZE];
     int menu_item_selection;
@@ -89,7 +46,7 @@ int input_main_menu_user_selection(void)
     if(sscanf(input_string, "%d", &menu_item_selection) == 1)
     {
         /* Return user entered value. If not in menu range, return error */
-        return (menu_item_selection < MENU_ITEMS_MAX &&
+        return (menu_item_selection <= n &&
                 menu_item_selection >= 0 ?
                 menu_item_selection: INPUT_MENU_OPTION_ERROR);
     }

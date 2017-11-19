@@ -1,5 +1,6 @@
 #include "formulas.h"
 #include "io.h"
+#include <stdlib.h>
 
 /**
  * Handles calculation formulas, gets user value input
@@ -117,4 +118,12 @@ double formula_actual_power_three_phase(
     double u, double i, double cos)
 {
     return u * i * sqrt(3) * cos;
+}
+
+/* Test for refactoring:
+    Added function that calculates resistance in series
+    Main menu should add formula automatically */
+double formula_rtot_series(double r1, double r2, double r3)
+{
+    return r1 + r2 + r3;
 }
