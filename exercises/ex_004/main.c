@@ -28,7 +28,6 @@
     MÖLK Utbildning
     */
 
-
 #include <stdio.h>
 #include <stdlib.h>
 #include "formulas.h"
@@ -36,8 +35,9 @@
 
 int main()
 {
-    int user_menu_choice, formula_index, formula_info_size;
-    double formula_return_value;
+    /* Formula index, size, retval */
+    int menu_select, f_index, f_size;
+    double f_retval;
 
     /* Scruct containing info about types used by formulas */
     unit_info unit_info[] =
@@ -112,45 +112,39 @@ int main()
     };
 
     output_clear_screen();
-    formula_info_size = sizeof(formula_info)/sizeof(formula_info[0]);
+    f_size = sizeof(formula_info)/sizeof(formula_info[0]);
 
     while(1)
     {
-        output_display_main_menu(
-            formula_info, formula_info_size);
-        user_menu_choice = input_main_menu_user_selection(
-            formula_info_size);
+        output_display_main_menu(formula_info, f_size);
+        menu_select = input_main_menu_user_selection(f_size);
 
         /* User entered invalid menu option */
-        while(user_menu_choice == INPUT_MENU_OPTION_ERROR)
+        while(menu_select == INPUT_MENU_OPTION_ERROR)
         {
             printf(STRING_ERROR_INPUT_WRONG_OPTION "\n");
-            user_menu_choice = input_main_menu_user_selection(
-                formula_info_size);
+            menu_select = input_main_menu_user_selection(f_size);
         }
 
         /* User entered 0, quit program */
-        if(user_menu_choice == INPUT_MENU_OPTION_QUIT)
+        if(menu_select == INPUT_MENU_OPTION_QUIT)
         {
             return 0;
         }
 
         /* Formula struct info index starts at zero, hence -1 */
-        formula_index = user_menu_choice - 1;
+        f_index = menu_select - 1;
 
         /* Display info about formula */
-        output_display_formula_info(&formula_info[formula_index]);
-
-        formula_return_value = formula_handler(
-            &formula_info[formula_index], unit_info);
-
-        unit_type formula_return_type = formula_info[formula_index].output;
+        output_display_formula_info(&formula_info[f_index]);
+        f_retval = formula_handler(&formula_info[f_index], unit_info);
+        unit_type f_ret_type = formula_info[f_index].output;
 
         /* Prints result of formula calculation,
             example "P = 2.32W" */
         printf("%c = %0.2f%s",
-            unit_info[formula_return_type].si_char,
-            formula_return_value,
-            unit_info[formula_return_type].value_char);
+            unit_info[f_ret_type].si_char,
+            f_retval,
+            unit_info[f_ret_type].value_char);
     }
 }
