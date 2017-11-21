@@ -4,7 +4,8 @@ CC = gcc
 SRC_EXT = c
 OBJ_EXT = o
 CFLAGS = -g -Wall
-SRC = $(wildcard *.$(SRC_EXT))
+MAINS = main_linkedlist.c main.c
+SRC = $(filter-out $(MAINS), $(wildcard *.$(SRC_EXT)))
 OBJ = $(SRC:.$(SRC_EXT)=.$(OBJ_EXT))
 
 .PHONY: cleantarget
@@ -12,11 +13,11 @@ OBJ = $(SRC:.$(SRC_EXT)=.$(OBJ_EXT))
 #Remove executable -> build -> run
 all: cleantarget link run
 
-compile:
-	$(CC) hello.c main.c world.c -o $(TARGET)
+link: $(OBJ) main.o
+	$(CC) $(OBJ) main.o -o $(TARGET) $(LIBS)
 
-link: $(OBJ)
-	$(CC) $(OBJ) -o $(TARGET) $(LIBS)
+ll: $(OBJ) main_linkedlist.o
+	$(CC) $(OBJ) main_linkedlist.o -o $(TARGET) $(LIBS)
 
 #Remove object files and executable
 clean:

@@ -16,7 +16,8 @@ enum
     CURRENT,
     COS,
     POWER,
-    VOLT_AMPERE
+    VOLT_AMPERE,
+    NONE
 };
 
 enum
@@ -41,6 +42,7 @@ typedef struct _struct_formula_info
     unit_type output;
     formula_func2 formula2;
     formula_func3 formula3;
+    struct _struct_formula_info * next;
 }formula_info;
 
 typedef struct _struct_unit_info
