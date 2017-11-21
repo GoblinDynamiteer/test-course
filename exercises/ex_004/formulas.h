@@ -57,7 +57,8 @@ typedef struct _struct_unit_info
 }unit_info;
 
 /* Function prototypes */
-double formula_handler(formula_info * f, unit_info * u);
+double formula_handler(formula_info * f, int index, unit_info * u);
+formula_info * formula_init_formulas(formula_info * node);
 double formula_ohms_law(double r, double i);
 double formula_rtot(double r1, double r2, double r3);
 double formula_power(double u, double i);

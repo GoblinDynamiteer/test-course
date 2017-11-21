@@ -16,9 +16,6 @@ all: cleantarget link run
 link: $(OBJ) main.o
 	$(CC) $(OBJ) main.o -o $(TARGET) $(LIBS)
 
-ll: $(OBJ) main_linkedlist.o
-	$(CC) $(OBJ) main_linkedlist.o -o $(TARGET) $(LIBS)
-
 #Remove object files and executable
 clean:
 	-rm -f *.$(OBJ_EXT)

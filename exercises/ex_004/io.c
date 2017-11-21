@@ -1,21 +1,24 @@
 #include "io.h"
 #include <stdbool.h>
 #include <string.h>
-#include <stdlib.h> // itoa
+#include <stdlib.h>
+#include "list.h"
 
 /**
  * Print main menu.
- * @param n Size of formula info struct array
+ * @param f Linked list with formula information, first node
  */
-void output_display_main_menu(formula_info * f, int n)
+void output_display_main_menu(formula_info * f)
 {
     printf("\nVälj vilka storheter du vill beräkna:\n");
 
-    for(int i = 0; i < n; i++)
+    int i = 1;
+    while(f != NULL)
     {
         printf("Välj %d för: %s\n",
-            (i + 1),
-            f[i].name);
+            i++,
+            f->name);
+        f = list_getnext(f);
     }
 
     printf("Välj %d för: FÖR ATT AVSLUTA\n",
@@ -24,21 +27,24 @@ void output_display_main_menu(formula_info * f, int n)
 
 /**
  * Print information about formula.
+ * @param f Linked list with formula information, first node
+ * @param index Index of linked list element
  */
-void output_display_formula_info(formula_info * f)
+void output_display_formula_info(formula_info * f, int index)
 {
+    f = list_get_index(f, index);
     printf(f->info);
 }
 
 /**
  * Handles user input, for menu choice
- * @param n Size of formula info struct array
+ * @param f Linked list with formula information, first node
  * @return User menu item selection, as a number
  */
-int input_main_menu_user_selection(int n)
+int input_main_menu_user_selection(formula_info * f)
 {
     char input_string[INPUT_CHAR_BUFFER_SIZE];
-    int menu_item_selection;
+    int menu_item_selection, n = list_get_size(f);
 
     fgets(input_string, INPUT_CHAR_BUFFER_SIZE, stdin);
 
@@ -136,10 +142,9 @@ void output_ask_for_unit_value_input(unit_info * s, int n)
 }
 
 /**
- * Clears terminal screen and sets code page to 1252
+ * Clears terminal screen
  */
 void output_clear_screen(void)
 {
-    system("chcp 1252");
     system("cls");
 }
