@@ -147,4 +147,5 @@ void output_ask_for_unit_value_input(unit_info * s, int n)
 void output_clear_screen(void)
 {
     system("cls");
+    system("chcp 1252");
 }
