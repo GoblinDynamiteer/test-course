@@ -7,8 +7,10 @@ CFLAGS = -g -Wall
 SRC = $(wildcard *.$(SRC_EXT))
 OBJ = $(SRC:.$(SRC_EXT)=.$(OBJ_EXT))
 
+.PHONY: cleantarget
+
 #Remove executable -> build -> run
-all: cleantarget link #run
+all: cleantarget link run
 
 compile:
 	$(CC) hello.c main.c world.c -o $(TARGET)
