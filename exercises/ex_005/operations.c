@@ -40,3 +40,9 @@ double calculate(
 
         return result;
 }
+
+char * result_to_string(
+    double result, double * input_values, int input_count, int operaton_id)
+{
+    return "Kalle"; // Placeholder
+}

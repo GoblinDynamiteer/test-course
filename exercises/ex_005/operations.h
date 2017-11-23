@@ -16,4 +16,7 @@ enum operation_id
 double calculate(
     double * input_values, int input_count, int operaton_id);
 
+char * result_to_string(
+    double result, double * input_values, int input_count, int operaton_id);
+
 #endif
