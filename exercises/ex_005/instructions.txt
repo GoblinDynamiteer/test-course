@@ -1,0 +1,8 @@
+Exercise
+https://codereview.stackexchange.com/questions/91740/simple-calculator-in-c
+
+- Use Git
+- Rafactor code from link
+- Write tests
+- Use a makefile with 2 targets: Build program and build test
+- Make "improvements" for the calculator
