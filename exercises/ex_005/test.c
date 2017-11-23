@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "operations.h"
+#include <stdbool.h>
 #include "../../unity/src/unity.h"
 
 void test_addition(void)
@@ -46,11 +47,14 @@ void test_multiplication(void)
 
     double values3[INPUTS_MAX];
     double expected_result = 0.0f;
+    bool first = true;
 
     for (int i = 0; i < INPUTS_MAX; i++)
     {
         values3[i] = 0.4 + i;
-        expected_result += values3[i];
+        expected_result = first ? values3[i] : expected_result * values3[i];
+
+        first = first ? false : false;
     }
 
     TEST_ASSERT_EQUAL_FLOAT(
@@ -74,11 +78,14 @@ void test_division(void)
 
     double values3[INPUTS_MAX];
     double expected_result = 0.0f;
+    bool first = true;
 
     for (int i = 0; i < INPUTS_MAX; i++)
     {
         values3[i] = 0.4 + i;
-        expected_result += values3[i];
+        expected_result = first ? values3[i] : expected_result / values3[i];
+
+        first = first ? false : false;
     }
 
     TEST_ASSERT_EQUAL_FLOAT(
@@ -102,11 +109,14 @@ void test_subraction(void)
 
     double values3[INPUTS_MAX];
     double expected_result = 0.0f;
+    bool first = true;
 
     for (int i = 0; i < INPUTS_MAX; i++)
     {
         values3[i] = 0.4 + i;
-        expected_result += values3[i];
+        expected_result = first ? values3[i] : expected_result - values3[i];
+
+        first = first ? false : false;
     }
 
     TEST_ASSERT_EQUAL_FLOAT(
