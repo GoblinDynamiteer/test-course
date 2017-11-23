@@ -14,6 +14,6 @@ enum operation_id
 };
 
 double calculate(
-    double * intput_values, int input_count, int operaton_id);
+    double * input_values, int input_count, int operaton_id);
 
 #endif
