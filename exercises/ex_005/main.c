@@ -1,4 +1,16 @@
-//Calculator program
+/*  Refactoring exercise for course "Testning"
+    Refactor code build by student in first programming course
+
+    GitHub:
+    https://github.com/GoblinDynamiteer/
+        test-course/tree/master/exercises/ex_005
+
+    Original code in '/original/main.c' and on web
+    https://codereview.stackexchange.com/
+        questions/91740/simple-calculator-in-c
+
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 
