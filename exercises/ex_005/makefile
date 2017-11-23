@@ -18,15 +18,14 @@ OBJ = $(SRC:.$(SRC_EXT)=.$(OBJ_EXT))
 all: compile_main run
 
 compile_main: $(OBJ) main.o
-	$(CC) $(OBJ) main.o -o $(EXECUTABLE) $(LIBS) $(COMPILER_FLAGS)
+	$(CC) $(OBJ) main.o -o $(EXECUTABLE) $(COMPILER_FLAGS)
 
 test: $(OBJ) test.o
-	$(CC) $(OBJ) test.o -o $(EXECUTABLE) $(LIBS) $(COMPILER_FLAGS)
+	$(CC) $(OBJ) test.o -o $(EXECUTABLE) $(COMPILER_FLAGS)
 
 #Remove object files and executable
 clean:
 	-rm -f *.$(OBJ_EXT)
-	-rm -f $(SUBDIR)/*.$(OBJ_EXT)
 	-rm -f $(EXECUTABLE).exe
 
 #Remove executable
