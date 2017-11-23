@@ -124,6 +124,25 @@ void test_subraction(void)
         calculate(values3, INPUTS_MAX, SUBTRACTION));
 }
 
+void test_to_string()
+{
+    double values1[] = { 123.12f, 22.02f, 11.11f, -33.2f };
+    int n = sizeof(values1) / sizeof(values1[0]);
+    double result = 123.12f + 22.02f + 11.11f - 33.2f;
+
+    char expected_string[300];
+    sprintf(
+        expected_string,
+        "%0.2f + %0.2f + %0.2f + %0.2f = %0.2f",
+        values1[0], values1[1], values1[2], values1[3], result
+    );
+
+    TEST_ASSERT_EQUAL_STRING(
+        expected_string,
+        result_to_string(result, values1, n, ADDITION)
+    );
+}
+
 int main()
 {
     UNITY_BEGIN();
@@ -132,6 +151,7 @@ int main()
     RUN_TEST(test_multiplication);
     RUN_TEST(test_subraction);
     RUN_TEST(test_division);
+    RUN_TEST(test_to_string);
 
     return UNITY_END();
 }
