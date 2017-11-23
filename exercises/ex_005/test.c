@@ -129,6 +129,7 @@ void test_to_string()
     double values1[] = { 123.12f, 22.02f, 11.11f, -33.2f };
     int n = sizeof(values1) / sizeof(values1[0]);
     double result = 123.12f + 22.02f + 11.11f - 33.2f;
+    char test_string[256];
 
     char expected_string[300];
     sprintf(
@@ -139,7 +140,7 @@ void test_to_string()
 
     TEST_ASSERT_EQUAL_STRING(
         expected_string,
-        result_to_string(result, values1, n, ADDITION)
+        result_to_string(result, values1, n, ADDITION, test_string)
     );
 }
 

@@ -1,4 +1,6 @@
 #include "operations.h"
+#include <stdio.h>
+#include <string.h>
 
 /**
  * Handles calculations
@@ -42,7 +44,50 @@ double calculate(
 }
 
 char * result_to_string(
-    double result, double * input_values, int input_count, int operaton_id)
+    double result, double * input_values, int input_count, int operaton_id,
+    char * return_string)
 {
-    return "Kalle"; // Placeholder
+    char sign, string_add[STRING_BUFFER];
+
+    switch(operaton_id)
+    {
+        case DIVISION:
+            sign = '/';
+            break;
+
+        case ADDITION:
+            sign = '+';
+            break;
+
+        case SUBTRACTION:
+            sign = '-';
+            break;
+
+        case MULTIPLICATION:
+            sign = '*';
+            break;
+
+        default:
+            break;
+    }
+
+    int i = 0;
+    string_add[0] = '\0';
+    return_string[0] = '\0';
+
+    sprintf(string_add, "%0.2f %c ", input_values[i++], sign);
+    strcat(return_string, string_add);
+
+    for(; i < input_count; i++)
+    {
+        sprintf(string_add, "%0.2f %c ",
+            input_values[i],
+            i < input_count - 1 ? sign : '=');
+        strcat(return_string, string_add);
+    }
+
+    sprintf(string_add, "%0.2f", result);
+    strcat(return_string, string_add);
+
+    return return_string;
 }
