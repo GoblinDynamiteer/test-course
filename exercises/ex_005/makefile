@@ -1,6 +1,8 @@
 CC = gcc
+UNTIY_SRC_PATH = ../../unity/src
 COMPILER_FLAGS = -g -Wall
 EXECUTABLE = refactor_calc
+EXECUTABLE_TEST = test_refactor_calc
 SRC_EXT = c
 OBJ_EXT = o
 MAIN_C = main.c
@@ -20,9 +22,8 @@ all: compile_main run
 compile_main: $(OBJ) main.o
 	$(CC) $(OBJ) main.o -o $(EXECUTABLE) $(COMPILER_FLAGS)
 
-test: $(OBJ) test.o
-	$(CC) $(OBJ) test.o -o $(EXECUTABLE) $(COMPILER_FLAGS)
-
+test: $(OBJ) $(UNTIY_SRC_PATH)/unity.o test.o
+	$(CC) $(OBJ) test.o $(UNTIY_SRC_PATH)/unity.o -o $(EXECUTABLE_TEST) $(COMPILER_FLAGS)
 #Remove object files and executable
 clean:
 	-rm -f *.$(OBJ_EXT)
