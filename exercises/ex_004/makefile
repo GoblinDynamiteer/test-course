@@ -4,7 +4,7 @@ CC = gcc
 SRC_EXT = c
 OBJ_EXT = o
 CFLAGS = -g -Wall
-MAINS = main_linkedlist.c main.c
+MAINS = main.c
 SRC = $(filter-out $(MAINS), $(wildcard *.$(SRC_EXT)))
 OBJ = $(SRC:.$(SRC_EXT)=.$(OBJ_EXT))
 

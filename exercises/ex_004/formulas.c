@@ -29,8 +29,8 @@ double formula_handler(formula_info * f, int index, unit_info * u)
     {
         value[i] = input_get_unit_value(
             &u[f->input[i]],
-            /* Only RTOT formula uses unit numbering: R1 R2 R3 */
-            (f->id == RTOT ? i + 1 : 0));
+            /* Only RTOT formulas uses unit numbering: R1 R2 R3 */
+            (f->id == RTOT || f->id == RTOT_SERIES ? i + 1 : 0));
     }
 
     output_value = ((f->input_count == 3) ?
