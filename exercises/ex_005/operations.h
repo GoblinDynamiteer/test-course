@@ -6,6 +6,8 @@
 #define OPERATION_INPUTS_MAX 20
 #define OPERATIONS_MAX 4
 
+#define OPERATION_MENU_ITEM_TO_ID(x) x-1
+
 typedef unsigned char uint8_t;
 
 enum operation_id
