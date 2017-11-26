@@ -14,7 +14,8 @@
  */
 void io_print_menu(void)
 {
-    printf("Enter a number from the list below\n\n");
+    io_print_line();
+    printf("\nEnter a number from the list below\n\n");
 
     for(int i = 0; i < OPERATIONS_MAX; i++)
     {
@@ -23,7 +24,38 @@ void io_print_menu(void)
         printf("\n");
     }
 
+    io_print_line();
+    printf("\n%d. Quit program\n", IO_MENU_QUIT_PROGRAM);
+    io_print_line();
     printf("\nEnter number: ");
+}
+
+/**
+ * Prints a line at default lenght
+ */
+void io_print_line(void)
+{
+    io_print_char('-', IO_LINE_DEFAULT_LEN);
+}
+
+/**
+ * Repeats char a number of times
+ * @param c       Character to print
+ * @param n       Number of times to print char
+ */
+void io_print_char(char c, int n)
+{
+    if(n < 0)
+    {
+        return;
+    }
+
+    n = n > IO_LINE_MAX_LEN ? IO_LINE_MAX_LEN : n;
+
+    while(n--)
+    {
+        printf("%c", c);
+    }
 }
 
 /**
