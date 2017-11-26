@@ -18,7 +18,7 @@
 #define ERROR_STRING_INCORRECT_MENU_OPTION ERROR_STRING_PREFIX \
     "Enter correct number e.g 1 - "
 #define INFO_STRING_NUMBER_INPUT_BEGIN \
-    "Enter numbers for calculation (Max 20).\n" \
+    "Enter numbers for calculation (max %d).\n" \
     "Input character 'd' when done\n\n"
 #define INFO_STRING_RETURN_TO_CONTINUE \
     "Press [Enter] to continue\n"

@@ -137,7 +137,8 @@ bool io_check_digit(char * string)
     {
         /* Non digit found in string */
         if( !isdigit(string[i]) &&
-            !(string[i] == '.' || string[i] == ','))
+            !(string[i] == '.' || string[i] == ',' ||
+              string[i] == '-' || string[i] == '+'))
         {
             return false;
         }

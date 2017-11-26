@@ -6,10 +6,11 @@
 
 operation_info op_info[] =
 {
-    { ADDITION,         "Addition",         '+' },
-    { SUBTRACTION,      "Subtraction",      '-' },
-    { MULTIPLICATION,   "Multiplication",   '*' },
-    { DIVISION,         "Division",         '/' }
+    { ADDITION,         "Addition",         '+',    OPERATION_INPUTS_MAX },
+    { SUBTRACTION,      "Subtraction",      '-',    OPERATION_INPUTS_MAX },
+    { MULTIPLICATION,   "Multiplication",   '*',    OPERATION_INPUTS_MAX },
+    { DIVISION,         "Division",         '/',    OPERATION_INPUTS_MAX },
+    { POWER_OF,         "Power of",         '^',    2 }
 };
 
 /**
@@ -24,6 +25,12 @@ float operation_calculate(
     {
         int i = 0;
         float result = input_values[i++];
+
+        if(operation_id == POWER_OF)
+        {
+            return operation_calculate_pow(
+                input_values[0], (int)input_values[1]);
+        }
 
         for(; i < input_count; i++)
         {
@@ -51,6 +58,29 @@ float operation_calculate(
         }
 
         return result;
+}
+
+/**
+ * Handles pow calculations X^Y
+ * @param x     X
+ * @param y     Y
+ * @return      Calculated value
+ */
+float operation_calculate_pow(float x, int y)
+{
+    /* If y is negative, division is used */
+    bool neg = (y < 0);
+    float retval = neg ? 1 : x;
+
+    /* Inverse y, if negative */
+    y = (y < 0) ? y * -1 : y;
+
+    while(y--)
+    {
+        retval = neg ? retval / x : retval * x;
+    }
+
+    return retval;
 }
 
 char * operation_result_to_string(
@@ -104,6 +134,21 @@ char operation_get_sign_char(int operation_id)
         if(op_info[i].operation_id == operation_id)
         {
             return op_info[i].sign;
+        }
+    }
+
+    printf(ERROR_STRING_OPERATION_NOT_FOUND);
+    return '0';
+}
+
+int operation_get_max_inputs(int operation_id)
+{
+    int n = sizeof(op_info) / sizeof(op_info[0]);
+    for (int i = 0; i < n; i++)
+    {
+        if(op_info[i].operation_id == operation_id)
+        {
+            return op_info[i].max_inputs;
         }
     }
 

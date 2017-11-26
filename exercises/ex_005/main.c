@@ -50,8 +50,9 @@ int main()
             operation_print_name(operation_id);
             printf("\n\n");
 
-            printf(INFO_STRING_NUMBER_INPUT_BEGIN);
-            while(input_count < OPERATION_INPUTS_MAX)
+            printf(INFO_STRING_NUMBER_INPUT_BEGIN,
+                operation_get_max_inputs(operation_id));
+            while(input_count < operation_get_max_inputs(operation_id))
             {
                 printf("\nEnter number %d: ", input_count + 1);
                 if(io_input_value_float(&input[input_count], &done))
@@ -79,8 +80,7 @@ int main()
 
             result = operation_calculate(input, input_count, operation_id);
             io_print_line();
-            printf("\nResult: ");
-            printf("\n");
+            printf("\nResult: \n");
             printf(operation_result_to_string(
                 result, input, input_count, operation_id, result_string));
             io_wait_return();

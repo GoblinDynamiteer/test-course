@@ -28,10 +28,12 @@ test: $(OBJ) $(UNTIY_SRC_PATH)/unity.o test.o
 clean:
 	-rm -f *.$(OBJ_EXT)
 	-rm -f $(EXECUTABLE).exe
+	-rm -f $(EXECUTABLE_TEST).exe
 
 #Remove executable
 cleantarget:
 	-rm -f $(EXECUTABLE).exe
+	-rm -f $(EXECUTABLE_TEST).exe
 
 #Run executable
 run: $(EXECUTABLE)
