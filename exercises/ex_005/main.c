@@ -13,14 +13,15 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 #include "operations.h"
 #include "io.h"
 
 int main()
 {
-    int menu_item_selection, operation_id;
+    int menu_item_selection, operation_id, input_count;
     float input[OPERATION_INPUTS_MAX], result;
-    char result_string[IO_INPUT_BUFFER];
+    char result_string[IO_INPUT_BUFFER], done;
     bool run = true;
 
     while(run)
@@ -36,10 +37,12 @@ int main()
         else
         {
             operation_id = OPERATION_MENU_ITEM_TO_ID(menu_item_selection);
+            input_count = 0;
 
             if(!operation_is_valid_id(operation_id))
             {
-                printf("Enter correct number e.g 1 - %d\n", OPERATIONS_MAX);
+                printf(ERROR_STRING_INCORRECT_MENU_OPTION "%d\n",
+                    OPERATIONS_MAX);
                 continue;
             }
 
@@ -47,15 +50,38 @@ int main()
             operation_print_name(operation_id);
             printf("\n\n");
 
-            printf("Enter first number: ");
-            io_input_value_float(&input[0]);
+            printf(INFO_STRING_NUMBER_INPUT_BEGIN);
+            while(input_count < OPERATION_INPUTS_MAX)
+            {
+                printf("\nEnter number %d: ", input_count + 1);
+                if(io_input_value_float(&input[input_count], &done))
+                {
+                    input_count++;
+                }
 
-            printf("Enter second number: ");
-            io_input_value_float(&input[1]);
+                else if(tolower(done) == 'd')
+                {
+                    if(input_count < 2)
+                    {
+                        printf(ERRROR_STRING_NOT_ENOUGH_NUMBERS);
+                        continue;
+                    }
 
-            result = operation_calculate(input, 2, operation_id);
+                    break;
+                }
+
+                else
+                {
+                    printf(ERRROR_STRING_INCORRECT_INPUT);
+                }
+            }
+
+            result = operation_calculate(input, input_count, operation_id);
+            io_print_line();
+            printf("\nResult: ");
+            printf("\n");
             printf(operation_result_to_string(
-                result, input, 2, operation_id, result_string));
+                result, input, input_count, operation_id, result_string));
         }
     }
 

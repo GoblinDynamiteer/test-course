@@ -14,6 +14,7 @@
  */
 void io_print_menu(void)
 {
+    printf("\n");
     io_print_line();
     printf("\nEnter a number from the list below\n\n");
 
@@ -62,14 +63,17 @@ void io_print_char(char c, int n)
  * Gets float input from user
  * @param val       Pointer to float variable
  *                  for storing value
+ * @param d         Pointer to character variable
+ *                  for storing first input char
  * @return          Input conversion success
  */
-bool io_input_value_float(float * val)
+bool io_input_value_float(float * val, char * d)
 {
     char buff[IO_INPUT_BUFFER];
 
     if(io_read_line(buff, IO_INPUT_BUFFER))
     {
+        *d = buff[0];
         return io_string_to_float(buff, val);
     }
 
@@ -84,10 +88,10 @@ bool io_input_value_float(float * val)
  */
 bool io_input_value_int(int * val)
 {
-    char buff[IO_INPUT_BUFFER];
+    char buff[IO_INPUT_BUFFER], d;
     float temp;
 
-    if(io_input_value_float(&temp))
+    if(io_input_value_float(&temp, &d))
     {
         *val = (int)temp;
         return true;
