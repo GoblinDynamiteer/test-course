@@ -14,6 +14,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "operations.h"
+#include "io.h"
 
 int main()
 {
@@ -28,7 +29,7 @@ int main()
     printf("4. Division\n\n");
 
     printf("Enter number: "); //User input for the calculator menu
-    scanf("%d", &menu);
+    io_input_value_int(&menu);
 
     printf("\n");
 
@@ -38,10 +39,10 @@ int main()
         printf("You entered Addition\n\n");
 
         printf("Enter first number: "); //User input for first number
-        scanf("%f", &num1);
+        io_input_value_float(&num1);
 
         printf("Enter second number: "); //User input for second number
-        scanf("%f", &num2);
+        io_input_value_float(&num2);
 
         printf("\n");
 
@@ -53,10 +54,10 @@ int main()
         printf("You entered Subtraction\n\n");
 
         printf("Enter first number: "); //User input for first number
-        scanf("%f", &num1);
+        io_input_value_float(&num1);
 
         printf("Enter second number: "); //User input for second number
-        scanf("%f", &num2);
+        io_input_value_float(&num2);
 
         printf("\n");
 
@@ -68,10 +69,10 @@ int main()
         printf("You entered Multiplication\n\n");
 
         printf("Enter first number: "); //User input for first number
-        scanf("%f", &num1);
+        io_input_value_float(&num1);
 
         printf("Enter second number: "); //User input for second number
-        scanf("%f", &num2);
+        io_input_value_float(&num2);
 
         printf("\n");
 
@@ -83,10 +84,10 @@ int main()
         printf("You entered Division\n\n");
 
         printf("Enter first number: "); //User input for first number
-        scanf("%f", &num1);
+        io_input_value_float(&num1);
 
         printf("Enter second number: "); //User input for first number
-        scanf("%f", &num2);
+        io_input_value_float(&num2);
 
         printf("\n");
 
