@@ -47,8 +47,6 @@ bool io_string_to_float(char * string, float * val)
         return false;
     }
 
-    printf("BEfore sscanf: ");
-    puts(string);
     /* Scan string for float value and return true */
     sscanf(string, "%f", val);
     return true;

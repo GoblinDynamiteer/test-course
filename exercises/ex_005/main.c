@@ -19,7 +19,8 @@
 int main()
 {
     int menu;
-    float num1, num2, result;
+    float input[INPUTS_MAX], result;
+    char result_string[IO_INPUT_BUFFER];
 
     printf("Enter a number from the list below\n\n");
 
@@ -39,61 +40,65 @@ int main()
         printf("You entered Addition\n\n");
 
         printf("Enter first number: ");
-        io_input_value_float(&num1);
+        io_input_value_float(&input[0]);
 
         printf("Enter second number: ");
-        io_input_value_float(&num2);
+        io_input_value_float(&input[1]);
 
         printf("\n");
 
-        result = num1 + num2;
+        result = operation_calculate(input, 2, ADDITION);
+        printf(operation_result_to_string(
+            result, input, 2, ADDITION, result_string));
 
-        printf("%.2f + %.2f = %.2f\n", num1, num2, result);
         break;
     case 2:
         printf("You entered Subtraction\n\n");
 
         printf("Enter first number: ");
-        io_input_value_float(&num1);
+        io_input_value_float(&input[0]);
 
         printf("Enter second number: ");
-        io_input_value_float(&num2);
+        io_input_value_float(&input[1]);
 
         printf("\n");
 
-        result = num1 - num2;
+        result = operation_calculate(input, 2, SUBTRACTION);
 
-        printf("%.2f - %.2f = %.2f\n", num1, num2, result);
+        printf(operation_result_to_string(
+            result, input, 2, SUBTRACTION, result_string));
         break;
     case 3:
         printf("You entered Multiplication\n\n");
 
         printf("Enter first number: ");
-        io_input_value_float(&num1);
+        io_input_value_float(&input[0]);
 
         printf("Enter second number: ");
-        io_input_value_float(&num2);
+        io_input_value_float(&input[1]);
 
         printf("\n");
 
-        result = num1 * num2;
+        result = operation_calculate(input, 2, MULTIPLICATION);
 
-        printf("%.2f * %.2f = %.2f\n", num1, num2, result);
+        printf(operation_result_to_string(
+            result, input, 2, MULTIPLICATION, result_string));
         break;
     case 4:
         printf("You entered Division\n\n");
 
         printf("Enter first number: ");
-        io_input_value_float(&num1);
+        io_input_value_float(&input[0]);
 
         printf("Enter second number: ");
-        io_input_value_float(&num2);
+        io_input_value_float(&input[1]);
 
         printf("\n");
 
-        result = num1 / num2;
+        result = operation_calculate(input, 2, DIVISION);
 
-        printf("%.2f / %.2f = %.2f\n", num1, num2, result);
+        printf(operation_result_to_string(
+            result, input, 2, DIVISION, result_string));
         break;
     default:
         printf("Enter correct number e.g 1 - 4\n");

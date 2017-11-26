@@ -5,6 +5,10 @@
 
 #define IO_INPUT_BUFFER 128
 
+#define ERROR_STRING_PREFIX "ERROR: "
+#define ERROR_STRING_OPERATION_NOT_FOUND ERROR_STRING_PREFIX \
+    "Operation not found"
+
 void io_skip_line();
 bool io_remove_nl(char *a);
 bool io_read_line(char *a, int n);
