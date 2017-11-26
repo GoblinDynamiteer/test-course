@@ -19,7 +19,7 @@
 int main()
 {
     int menu;
-    float input[INPUTS_MAX], result;
+    float input[OPERATION_INPUTS_MAX], result;
     char result_string[IO_INPUT_BUFFER];
 
     io_print_menu();

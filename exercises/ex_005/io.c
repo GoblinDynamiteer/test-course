@@ -166,7 +166,7 @@ bool io_read_line(char * s, int n)
         return false;
     }
 
-    if(!io_remove_nl(a))
+    if(!io_remove_nl(s))
     {
         io_skip_line();
     }

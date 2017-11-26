@@ -1,7 +1,9 @@
 #ifndef OPERATIONS_H
 #define OPERATIONS_H
 
-#define INPUTS_MAX 20
+#include <stdbool.h>
+
+#define OPERATION_INPUTS_MAX 20
 #define OPERATIONS_MAX 4
 
 typedef unsigned char uint8_t;
@@ -28,5 +30,6 @@ char * operation_result_to_string(
     char * return_string);
 void operation_print_name(int operation_id);
 char operation_get_sign_char(int operation_id);
+bool operation_is_valid_id(int operation_id);
 
 #endif

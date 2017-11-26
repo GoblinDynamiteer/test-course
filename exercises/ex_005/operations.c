@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdbool.h>
 #include "io.h"
 #include "operations.h"
 
@@ -56,29 +57,8 @@ char * operation_result_to_string(
     float result, float * input_values, int input_count, int operation_id,
     char * return_string)
 {
-    char sign, string_add[IO_INPUT_BUFFER];
-
-    switch(operation_id)
-    {
-        case DIVISION:
-            sign = '/';
-            break;
-
-        case ADDITION:
-            sign = '+';
-            break;
-
-        case SUBTRACTION:
-            sign = '-';
-            break;
-
-        case MULTIPLICATION:
-            sign = '*';
-            break;
-
-        default:
-            break;
-    }
+    char string_add[IO_INPUT_BUFFER];
+    char sign = operation_get_sign_char(operation_id);
 
     int i = 0;
     string_add[0] = '\0';
@@ -129,4 +109,9 @@ char operation_get_sign_char(int operation_id)
 
     printf(ERROR_STRING_OPERATION_NOT_FOUND);
     return '0';
+}
+
+bool operation_is_valid_id(int operation_id)
+{
+    return (operation_id >= 0 && operation_id < OPERATIONS_MAX);
 }
