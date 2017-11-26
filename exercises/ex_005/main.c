@@ -22,17 +22,8 @@ int main()
     float input[INPUTS_MAX], result;
     char result_string[IO_INPUT_BUFFER];
 
-    printf("Enter a number from the list below\n\n");
-
-    printf("1. Addition\n");
-    printf("2. Subtraction\n");
-    printf("3. Multiplication\n");
-    printf("4. Division\n\n");
-
-    printf("Enter number: ");
+    io_print_menu();
     io_input_value_int(&menu);
-
-    printf("\n");
 
     switch(menu)
     {

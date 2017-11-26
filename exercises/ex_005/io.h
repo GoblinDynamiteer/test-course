@@ -17,5 +17,6 @@ int io_replace_comma(char * string);
 bool io_check_digit(char * string);
 bool io_string_to_float(char * string, float * val);
 bool io_input_value_int(int * val);
+void io_print_menu(void);
 
 #endif

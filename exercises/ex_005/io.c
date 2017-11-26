@@ -7,7 +7,31 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "io.h"
+#include "operations.h"
 
+/**
+ * Prints main menu
+ */
+void io_print_menu(void)
+{
+    printf("Enter a number from the list below\n\n");
+
+    for(int i = 0; i < OPERATIONS_MAX; i++)
+    {
+        printf("%i. ", i + 1);
+        operation_print_name(i);
+        printf("\n");
+    }
+
+    printf("\nEnter number: ");
+}
+
+/**
+ * Gets float input from user
+ * @param val       Pointer to float variable
+ *                  for storing value
+ * @return          Input conversion success
+ */
 bool io_input_value_float(float * val)
 {
     char buff[IO_INPUT_BUFFER];
@@ -20,6 +44,12 @@ bool io_input_value_float(float * val)
     return false;
 }
 
+/**
+ * Gets integer input from user
+ * @param val       Pointer to integer variable
+ *                  for storing value
+ * @return          Conversion success
+ */
 bool io_input_value_int(int * val)
 {
     char buff[IO_INPUT_BUFFER];
@@ -34,6 +64,13 @@ bool io_input_value_int(int * val)
     return false;
 }
 
+/**
+ * Converts string to float
+ * @param string    String to convert
+ * @param val       Pointer to float variable
+ *                  for storing value
+ * @return          Conversion success
+ */
 bool io_string_to_float(char * string, float * val)
 {
     bool comma_found = false;
@@ -52,6 +89,11 @@ bool io_string_to_float(char * string, float * val)
     return true;
 }
 
+/**
+ * Checks if string is numeric
+ * @param string    String to check
+ * @return          Bool if numeric
+ */
 bool io_check_digit(char * string)
 {
     /* Iterate through string, check for errors */
@@ -68,7 +110,11 @@ bool io_check_digit(char * string)
     return true;
 }
 
-/* Replace commas with dots */
+/**
+ * Replaces commas with dots
+ * @param string    String to replace commas in
+ * @return          Number of commas replaced
+ */
 int io_replace_comma(char * string)
 {
     int count = 0;
@@ -107,9 +153,15 @@ bool io_remove_nl(char * a)
     return false;
 }
 
-bool io_read_line(char *a, int n)
+/**
+ * Read user input to string
+ * @param s         String buffer
+ * @param n         String buffer size
+ * @return          Read success
+ */
+bool io_read_line(char * s, int n)
 {
-    if(fgets(a, n, stdin) == NULL)
+    if(fgets(s, n, stdin) == NULL)
     {
         return false;
     }
