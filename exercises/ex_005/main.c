@@ -59,9 +59,10 @@ int main()
                     input_count++;
                 }
 
+                /* User entered d/D, to indicate end of number input */
                 else if(tolower(done) == 'd')
                 {
-                    if(input_count < 2)
+                    if(input_count < OPERATION_INPUTS_MIN)
                     {
                         printf(ERRROR_STRING_NOT_ENOUGH_NUMBERS);
                         continue;
@@ -82,6 +83,7 @@ int main()
             printf("\n");
             printf(operation_result_to_string(
                 result, input, input_count, operation_id, result_string));
+            io_wait_return();
         }
     }
 

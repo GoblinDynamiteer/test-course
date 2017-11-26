@@ -147,6 +147,16 @@ bool io_check_digit(char * string)
 }
 
 /**
+ * Press enter to continue
+ */
+void io_wait_return(void)
+{
+    printf("\n" INFO_STRING_RETURN_TO_CONTINUE);
+    fflush(stdin);
+    getchar();
+}
+
+/**
  * Replaces commas with dots
  * @param string    String to replace commas in
  * @return          Number of commas replaced

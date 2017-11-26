@@ -20,6 +20,8 @@
 #define INFO_STRING_NUMBER_INPUT_BEGIN \
     "Enter numbers for calculation (Max 20).\n" \
     "Input character 'd' when done\n\n"
+#define INFO_STRING_RETURN_TO_CONTINUE \
+    "Press [Enter] to continue\n"
 
 void io_skip_line();
 bool io_remove_nl(char *a);
@@ -32,5 +34,6 @@ bool io_input_value_int(int * val);
 void io_print_menu(void);
 void io_print_char(char c, int n);
 void io_print_line(void);
+void io_wait_return(void);
 
 #endif

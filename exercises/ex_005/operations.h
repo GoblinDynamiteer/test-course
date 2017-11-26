@@ -4,6 +4,7 @@
 #include <stdbool.h>
 
 #define OPERATION_INPUTS_MAX 20
+#define OPERATION_INPUTS_MIN 2
 #define OPERATIONS_MAX 4
 
 #define OPERATION_MENU_ITEM_TO_ID(x) x-1
