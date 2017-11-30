@@ -88,7 +88,7 @@ bool io_input_value_float(float * val, char * d)
  */
 bool io_input_value_int(int * val)
 {
-    char buff[IO_INPUT_BUFFER], d;
+    char d;
     float temp;
 
     if(io_input_value_float(&temp, &d))
@@ -109,8 +109,6 @@ bool io_input_value_int(int * val)
  */
 bool io_string_to_float(char * string, float * val)
 {
-    bool comma_found = false;
-
     /* If empty string */
     if(string[0] == '\n' || string[0] == '\0')
         return false;

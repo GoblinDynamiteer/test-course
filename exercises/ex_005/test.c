@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "operations.h"
 #include <stdbool.h>
-#include "../../unity/src/unity.h"
+#include "unity.h"
 
 void test_addition(void)
 {
