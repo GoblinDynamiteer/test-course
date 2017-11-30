@@ -41,8 +41,8 @@ void io_print_line(void)
 
 /**
  * Repeats char a number of times
- * @param c       Character to print
- * @param n       Number of times to print char
+ * @param c Character to print
+ * @param n Number of times to print char
  */
 void io_print_char(char c, int n)
 {
@@ -61,11 +61,9 @@ void io_print_char(char c, int n)
 
 /**
  * Gets float input from user
- * @param val       Pointer to float variable
- *                  for storing value
- * @param d         Pointer to character variable
- *                  for storing first input char
- * @return          Input conversion success
+ * @param  val Pointer to float variable for storing value
+ * @param  d   Pointer to character variable for storing first input char
+ * @return     Input conversion success
  */
 bool io_input_value_float(float * val, char * d)
 {
@@ -82,9 +80,8 @@ bool io_input_value_float(float * val, char * d)
 
 /**
  * Gets integer input from user
- * @param val       Pointer to integer variable
- *                  for storing value
- * @return          Conversion success
+ * @param  val Pointer to integer variable for storing value
+ * @return     Input conversion success
  */
 bool io_input_value_int(int * val)
 {
@@ -176,6 +173,9 @@ int io_replace_comma(char * string)
     return count;
 }
 
+/**
+ * Skips line in stdin
+ */
 void io_skip_line()
 {
     int c;
@@ -185,6 +185,11 @@ void io_skip_line()
     }
 }
 
+/**
+ * Replaces new line with null terminator
+ * @param  a Char to check
+ * @return   Removal status
+ */
 bool io_remove_nl(char * a)
 {
     int i = strlen(a) - 1;

@@ -111,6 +111,10 @@ char * operation_result_to_string(
     return return_string;
 }
 
+/**
+ * Prints math operation name
+ * @param operation_id Math operation eg DIVISION, SUBTRACTION
+ */
 void operation_print_name(int operation_id)
 {
     int n = sizeof(op_info) / sizeof(op_info[0]);
@@ -126,6 +130,11 @@ void operation_print_name(int operation_id)
     printf(ERROR_STRING_OPERATION_NOT_FOUND);
 }
 
+/**
+ * Gets sign character for math op, eg + - / *
+ * @param  operation_id Math operation eg DIVISION, SUBTRACTION
+ * @return              Sign char for operation
+ */
 char operation_get_sign_char(int operation_id)
 {
     int n = sizeof(op_info) / sizeof(op_info[0]);
@@ -141,6 +150,11 @@ char operation_get_sign_char(int operation_id)
     return '0';
 }
 
+/**
+ * Gets max user input values for math operation
+ * @param  operation_id Math operation eg DIVISION, SUBTRACTION
+ * @return              Max inputs for operation
+ */
 int operation_get_max_inputs(int operation_id)
 {
     int n = sizeof(op_info) / sizeof(op_info[0]);
@@ -156,6 +170,11 @@ int operation_get_max_inputs(int operation_id)
     return '0';
 }
 
+/**
+ * Check if pass id is a valid math operation
+ * @param  operation_id Math operation eg DIVISION, SUBTRACTION
+ * @return              Operation validity
+ */
 bool operation_is_valid_id(int operation_id)
 {
     return (operation_id >= 0 && operation_id < OPERATIONS_MAX);

@@ -9,6 +9,7 @@ OBJ_EXT = o
 MAIN_C = main.c
 TEST_C = test.c
 
+# Find source files
 SRC_MAIN = $(filter-out $(TEST_C), $(wildcard *.$(SRC_EXT)))
 SRC_TEST = $(filter-out $(MAIN_C), $(wildcard *.$(SRC_EXT)))
 SRC_TEST += $(wildcard $(UNITY_SRC)/*.$(SRC_EXT))
@@ -29,20 +30,18 @@ main: $(OBJ_MAIN)
 test: $(OBJ_TEST)
 	$(CC) $(OBJ_TEST) -o test_$(EXECUTABLE) $(COMPILER_FLAGS)
 
+#Compile source files to object files
 %.o: %.c
 	$(CC) $< -c -o $@ $(COMPILER_FLAGS)
 
 #Remove object files and executable
-clean:
+clean: cleantarget
 	-rm -f $(OBJ_MAIN)
 	-rm -f $(OBJ_TEST)
-	-rm -f $(EXECUTABLE).exe
-	-rm -f test_$(EXECUTABLE)
 
 #Remove executable
 cleantarget:
-	-rm -f $(EXECUTABLE).exe
-	-rm -f test_$(EXECUTABLE)
+	-rm -f *.exe
 
 #Run executable
 run: $(EXECUTABLE)
