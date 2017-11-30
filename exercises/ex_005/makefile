@@ -10,7 +10,7 @@ MAIN_C = main.c
 TEST_C = test.c
 
 COMMAND_DELETE = -rm -f
-COMPILER_FLAGS = -g -Wall -I $(UNITY_SRC)
+CC_FLAGS = -Wall -I $(UNITY_SRC)
 
 # Find source files
 SRC_MAIN = $(filter-out $(TEST_C), $(wildcard *.$(SRC_EXT)))
@@ -21,32 +21,32 @@ SRC_TEST += $(wildcard $(UNITY_SRC)/*.$(SRC_EXT))
 OBJ_MAIN = $(SRC_MAIN:.$(SRC_EXT)=.$(OBJ_EXT))
 OBJ_TEST = $(SRC_TEST:.$(SRC_EXT)=.$(OBJ_EXT))
 
-.PHONY: cleantarget
+.PHONY: clean_exec
 
 #Remove executable -> build -> run
 all: main run
 
 main: $(OBJ_MAIN)
 	@echo "Building main"
-	@$(CC) $(OBJ_MAIN) -o $(EXECUTABLE) $(COMPILER_FLAGS)
+	@$(CC) $(OBJ_MAIN) -o $(EXECUTABLE) $(CC_FLAGS)
 
 test: $(OBJ_TEST)
 	@echo "Building test"
-	@$(CC) $(OBJ_TEST) -o test_$(EXECUTABLE) $(COMPILER_FLAGS)
+	@$(CC) $(OBJ_TEST) -o test_$(EXECUTABLE) $(CC_FLAGS)
 
 #Compile source files to object files
 %.$(OBJ_EXT): %.$(SRC_EXT)
 	@echo "Compiling $< -> $@"
-	@$(CC) $< -c -o $@ $(COMPILER_FLAGS)
+	@$(CC) $< -c -o $@ $(CC_FLAGS)
 
 #Remove object files and executable
-clean: cleantarget
+clean: clean_exec
 	@echo "Cleaning files"
 	@$(COMMAND_DELETE) $(OBJ_MAIN)
 	@$(COMMAND_DELETE) $(OBJ_TEST)
 
 #Remove executable
-cleantarget:
+clean_exec:
 	@echo "Cleaning target"
 	@$(COMMAND_DELETE) *.$(EXE_EXT)
 
