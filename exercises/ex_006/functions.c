@@ -111,5 +111,12 @@ char get_operation_sign(operation_id id)
 
 double input_value(void)
 {
-    return 0.0f;
+    double d;
+
+    if(scanf("%lf", &d) != 1)
+    {
+        return 0.0f;
+    }
+
+    return d;
 }
