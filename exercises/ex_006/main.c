@@ -21,6 +21,7 @@ int main(int argc, char const *argv[])
     double val[MAX_INPUT];
     bool correct_input;
 
+    /* Set up pointer array to operator functions */
     double (*op_func[NUM_OPERATIONS])(double val1, double val2);
     op_func[ADDITION] =       operation_add;
     op_func[SUBTRACTION] =    operation_subtract;
@@ -44,7 +45,6 @@ int main(int argc, char const *argv[])
 
             do
             {
-                fflush(stdin);
                 correct_input = input_value(&val[i]);
                 if(!correct_input)
                 {

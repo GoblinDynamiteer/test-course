@@ -57,6 +57,10 @@ double operation_divide(double a, double b)
     return a / b;
 }
 
+/**
+ * Get operation ID from user input
+ * @return  Operation ID
+ */
 operation_id input_operation(void)
 {
     char input;
@@ -86,6 +90,11 @@ operation_id input_operation(void)
     return ERROR_OP_NOT_FOUND;
 }
 
+/**
+ * Get calculation operation sign eg '+'
+ * @param  id Operation ID, eg ADDITION or SUBTRACTION
+ * @return    Operetation sign char
+ */
 char get_operation_sign(operation_id id)
 {
     char sign[] = { '+', '/', '*', '-' };
@@ -109,9 +118,15 @@ char get_operation_sign(operation_id id)
     return '0';
 }
 
+/**
+ * Gets value from user input
+ * @param  val Pointer to varible for storing value
+ * @return     True: Correct user input - False: Incorrect user input
+ */
 bool input_value(double * val)
 {
     double d;
+    fflush(stdin);
 
     if(scanf("%lf", &d) == 1)
     {
