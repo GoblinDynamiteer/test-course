@@ -73,6 +73,33 @@ void test_function_divide(void)
     TEST_ASSERT_EQUAL_FLOAT(0, operation_divide(a, b));
 }
 
+void test_input_operation(void)
+{
+    operation_id id;
+
+    /* Add to stdin to fake scanf
+      // file contents: +2-*/a
+    freopen("test/ops.txt", "r", stdin);
+
+    id = ADDITION;
+    TEST_ASSERT_EQUAL(id, input_operation());
+
+    id = ERROR_OP_NOT_FOUND;
+    TEST_ASSERT_EQUAL(id, input_operation());
+
+    id = SUBTRACTION;
+    TEST_ASSERT_EQUAL(id, input_operation());
+
+    id = MULTIPLICATION;
+    TEST_ASSERT_EQUAL(id, input_operation());
+
+    id = DIVISION;
+    TEST_ASSERT_EQUAL(id, input_operation());
+
+    id = ERROR_OP_NOT_FOUND;
+    TEST_ASSERT_EQUAL(id, input_operation());
+}
+
 int main()
 {
     UNITY_BEGIN();
@@ -81,6 +108,7 @@ int main()
     RUN_TEST(test_function_subtract);
     RUN_TEST(test_function_multiply);
     RUN_TEST(test_function_divide);
+    RUN_TEST(test_input_operation);
 
     return UNITY_END();
 }
