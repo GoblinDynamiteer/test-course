@@ -88,5 +88,23 @@ operation_id input_operation(void)
 
 char get_operation_sign(operation_id id)
 {
-    return 'x';
+    char sign[] = { '+', '/', '*', '-' };
+
+    operation_id op_id[] =
+    {
+        ADDITION,
+        DIVISION,
+        MULTIPLICATION,
+        SUBTRACTION
+    };
+
+    for (int i = 0; i < sizeof(op_id) / sizeof(operation_id); i++)
+    {
+        if(id == op_id[i])
+        {
+            return sign[i];
+        }
+    }
+
+    return '0';
 }
