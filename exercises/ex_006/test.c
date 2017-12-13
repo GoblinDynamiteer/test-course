@@ -77,8 +77,8 @@ void test_input_operation(void)
 {
     operation_id id;
 
-    /* Add to stdin to fake scanf
-      // file contents: +2-*/a
+    // Add to stdin to fake scanf
+    // file contents: +2-*/a
     freopen("test/ops.txt", "r", stdin);
 
     id = ADDITION;
