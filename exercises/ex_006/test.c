@@ -100,6 +100,22 @@ void test_input_operation(void)
     TEST_ASSERT_EQUAL(id, input_operation());
 }
 
+void test_input_value(void)
+{
+    // Add to stdin to fake scanf
+    // file contents: 22.33 1.3 -0.3 .4 .05 a f
+    freopen("test/values.txt", "r", stdin);
+
+    double value[] = {22.33, 1.3, -0.3, .4, .05};
+    //int i = 0;
+
+    TEST_ASSERT_EQUAL_FLOAT(value[0], input_value());
+    TEST_ASSERT_EQUAL_FLOAT(value[1], input_value());
+    TEST_ASSERT_EQUAL_FLOAT(value[2], input_value());
+    TEST_ASSERT_EQUAL_FLOAT(value[3], input_value());
+    TEST_ASSERT_EQUAL_FLOAT(value[4], input_value());
+}
+
 void test_get_operation_sign(void)
 {
     operation_id id = ERROR_OP_NOT_FOUND;
@@ -128,6 +144,7 @@ int main()
     RUN_TEST(test_function_divide);
     RUN_TEST(test_input_operation);
     RUN_TEST(test_get_operation_sign);
+    RUN_TEST(test_input_value);
 
     return UNITY_END();
 }
