@@ -1,0 +1,8 @@
+Exercise
+Practice before exam
+https://www.programiz.com/c-programming/c-switch-case-statement
+
+- Use Git
+- Refactor code from link
+- Write tests
+- Use a makefile with 2 targets: Build program and build test
