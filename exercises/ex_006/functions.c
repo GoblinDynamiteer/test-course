@@ -85,3 +85,8 @@ operation_id input_operation(void)
 
     return ERROR_OP_NOT_FOUND;
 }
+
+char get_operation_sign(operation_id id)
+{
+    return 'x';
+}
