@@ -11,8 +11,8 @@
 #include <stdbool.h>
 
 double operation_add(double a, double b);
-char operation_subtract(double a, double b);
-char operation_multiply(double a, double b);
-char operation_divide(double a, double b);
+double operation_subtract(double a, double b);
+double operation_multiply(double a, double b);
+double operation_divide(double a, double b);
 
 #endif
