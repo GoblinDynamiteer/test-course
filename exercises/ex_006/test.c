@@ -107,13 +107,16 @@ void test_input_value(void)
     freopen("test/values.txt", "r", stdin);
 
     double value[] = {22.33, 1.3, -0.3, .4, .05};
-    //int i = 0;
+    int i = 0;
 
     TEST_ASSERT_EQUAL_FLOAT(value[0], input_value());
     TEST_ASSERT_EQUAL_FLOAT(value[1], input_value());
     TEST_ASSERT_EQUAL_FLOAT(value[2], input_value());
     TEST_ASSERT_EQUAL_FLOAT(value[3], input_value());
     TEST_ASSERT_EQUAL_FLOAT(value[4], input_value());
+
+    TEST_ASSERT_EQUAL_FLOAT(0.0f, input_value());
+    TEST_ASSERT_EQUAL_FLOAT(0.0f, input_value());
 }
 
 void test_get_operation_sign(void)
