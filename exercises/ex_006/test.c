@@ -100,6 +100,24 @@ void test_input_operation(void)
     TEST_ASSERT_EQUAL(id, input_operation());
 }
 
+void test_get_operation_sign(void)
+{
+    operation_id id = ERROR_OP_NOT_FOUND;
+    TEST_ASSERT_EQUAL('0', get_operation_sign(id));
+
+    id = ADDITION;
+    TEST_ASSERT_EQUAL('+', get_operation_sign(id));
+
+    id = SUBTRACTION;
+    TEST_ASSERT_EQUAL('-', get_operation_sign(id));
+
+    id = DIVISION;
+    TEST_ASSERT_EQUAL('/', get_operation_sign(id));
+
+    id = MULTIPLICATION;
+    TEST_ASSERT_EQUAL('*', get_operation_sign(id));
+}
+
 int main()
 {
     UNITY_BEGIN();
@@ -109,6 +127,7 @@ int main()
     RUN_TEST(test_function_multiply);
     RUN_TEST(test_function_divide);
     RUN_TEST(test_input_operation);
+    RUN_TEST(test_get_operation_sign);
 
     return UNITY_END();
 }
