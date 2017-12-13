@@ -17,6 +17,12 @@ int main(int argc, char const *argv[])
     operation_id op_id;
     double val1, val2;
 
+    double (*op_func[4])(double val1, double val2);
+    op_func[ADDITION] =       operation_add;
+    op_func[SUBTRACTION] =    operation_subtract;
+    op_func[MULTIPLICATION] = operation_multiply;
+    op_func[DIVISION] =       operation_divide;
+
     printf("Enter an operator (+, -, *, /): ");
     op_id = input_operation();
 
@@ -30,31 +36,11 @@ int main(int argc, char const *argv[])
         printf("Enter two operands: ");
         scanf("%lf %lf", &val1, &val2);
 
-        switch(op_id)
-        {
-            case ADDITION:
-                printf("%.1lf + %.1lf = %.1lf",
-                    val1, val2, operation_add(val1, val2));
-                break;
-
-            case SUBTRACTION:
-                printf("%.1lf - %.1lf = %.1lf",
-                    val1, val2, operation_subtract(val1, val2));
-                break;
-
-            case MULTIPLICATION:
-                printf("%.1lf * %.1lf = %.1lf",
-                    val1, val2, operation_multiply(val1, val2));
-                break;
-
-            case DIVISION:
-                printf("%.1lf / %.1lf = %.1lf",
-                    val1, val2, operation_divide(val1, val2));
-                break;
-
-            default:
-                break;
-        }
+        printf("%.1lf %c %.1lf = %.1lf",
+            val1,
+            get_operation_sign(op_id),
+            val2,
+            (*op_func[op_id])(val1, val2));
     }
 
     return 0;
