@@ -6,6 +6,7 @@
  */
 
 #include "functions.h"
+#include <stdio.h>
 
 /**
  * Add two numbers and return result
@@ -58,5 +59,33 @@ double operation_divide(double a, double b)
 
 operation_id input_operation(void)
 {
-    return -1;
+    char input;
+    int c = scanf("%c", &input);
+
+    if(c != 1)
+    {
+        return ERROR_OP_NOT_FOUND;
+    }
+
+    if(input == '+')
+    {
+        return ADDITION;
+    }
+
+    if(input == '-')
+    {
+        return SUBTRACTION;
+    }
+
+    if(input == '*')
+    {
+        return MULTIPLICATION;
+    }
+
+    if(input == '/')
+    {
+        return DIVISION;
+    }
+
+    return ERROR_OP_NOT_FOUND;
 }
