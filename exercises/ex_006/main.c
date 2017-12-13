@@ -10,6 +10,7 @@
  */
 
 #include <stdio.h>
+#include "functions.h"
 
 int main(int argc, char const *argv[])
 {
@@ -25,19 +26,23 @@ int main(int argc, char const *argv[])
     switch(calc_op)
     {
         case '+':
-            printf("%.1lf + %.1lf = %.1lf", val1, val2, val1 + val2);
+            printf("%.1lf + %.1lf = %.1lf",
+                val1, val2, operation_add(val1, val2));
             break;
 
         case '-':
-            printf("%.1lf - %.1lf = %.1lf", val1, val2, val1 - val2);
+            printf("%.1lf - %.1lf = %.1lf",
+                val1, val2, operation_subtract(val1, val2));
             break;
 
         case '*':
-            printf("%.1lf * %.1lf = %.1lf", val1, val2, val1 * val2);
+            printf("%.1lf * %.1lf = %.1lf",
+                val1, val2, operation_multiply(val1, val2));
             break;
 
         case '/':
-            printf("%.1lf / %.1lf = %.1lf", val1, val2, val1 / val2);
+            printf("%.1lf / %.1lf = %.1lf",
+                val1, val2, operation_divide(val1, val2));
             break;
 
         default:
