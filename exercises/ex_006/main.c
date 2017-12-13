@@ -12,12 +12,16 @@
 #include <stdio.h>
 #include "functions.h"
 
+#define MAX_INPUT 2
+#define NUM_OPERATIONS 4
+
 int main(int argc, char const *argv[])
 {
     operation_id op_id;
-    double val1, val2;
+    double val[MAX_INPUT];
+    bool correct_input;
 
-    double (*op_func[4])(double val1, double val2);
+    double (*op_func[NUM_OPERATIONS])(double val1, double val2);
     op_func[ADDITION] =       operation_add;
     op_func[SUBTRACTION] =    operation_subtract;
     op_func[MULTIPLICATION] = operation_multiply;
@@ -33,14 +37,28 @@ int main(int argc, char const *argv[])
 
     else
     {
-        printf("Enter two operands: ");
-        scanf("%lf %lf", &val1, &val2);
+        printf("Enter two operands\n");
+        for (int i = 0; i < MAX_INPUT; i++)
+        {
+            printf("Value %d: ", i + 1);
+
+            do
+            {
+                fflush(stdin);
+                correct_input = input_value(&val[i]);
+                if(!correct_input)
+                {
+                    printf("Error! wrong input, try again\n");
+                }
+            }
+            while(!correct_input);
+        }
 
         printf("%.1lf %c %.1lf = %.1lf",
-            val1,
+            val[0],
             get_operation_sign(op_id),
-            val2,
-            (*op_func[op_id])(val1, val2));
+            val[1],
+            (*op_func[op_id])(val[0], val[1]));
     }
 
     return 0;
