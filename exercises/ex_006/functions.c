@@ -113,10 +113,11 @@ bool input_value(double * val)
 {
     double d;
 
-    if(scanf("%lf", &d) != 1)
+    if(scanf("%lf", &d) == 1)
     {
-        return 0.0f;
+        *val = d;
+        return true;
     }
 
-    return d;
+    return false;
 }

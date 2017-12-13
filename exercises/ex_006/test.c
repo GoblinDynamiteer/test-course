@@ -135,7 +135,7 @@ void test_input_value(void)
     TEST_ASSERT_TRUE(input_value(&test_val));
     TEST_ASSERT_EQUAL_FLOAT(13.4f, test_val);
 
-    freopen("test/string2.txt", "r", stdin);
+    freopen("test/string3.txt", "r", stdin);
     TEST_ASSERT_FALSE(input_value(&test_val));
 }
 
