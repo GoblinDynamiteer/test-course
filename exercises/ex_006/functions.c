@@ -9,20 +9,25 @@
 
 double operation_add(double a, double b)
 {
-    return 1.0f;
+    return a + b;
 }
 
 double operation_subtract(double a, double b)
 {
-    return 1.0f;
+    return a - b;
 }
 
 double operation_multiply(double a, double b)
 {
-    return 1.0f;
+    return a * b;
 }
 
 double operation_divide(double a, double b)
 {
-    return 1.0f;
+    if(b == 0.0)
+    {
+        return 0.0;
+    }
+    
+    return a / b;
 }
