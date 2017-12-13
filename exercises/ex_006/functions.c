@@ -62,29 +62,25 @@ operation_id input_operation(void)
     char input;
     int c = scanf("%c", &input);
 
-    if(c != 1)
+    operation_id id[] =
     {
-        return ERROR_OP_NOT_FOUND;
-    }
+        ADDITION,
+        DIVISION,
+        MULTIPLICATION,
+        SUBTRACTION
+    };
 
-    if(input == '+')
-    {
-        return ADDITION;
-    }
+    char sign[] = { '+', '/', '*', '-' };
 
-    if(input == '-')
+    if(c == 1)
     {
-        return SUBTRACTION;
-    }
-
-    if(input == '*')
-    {
-        return MULTIPLICATION;
-    }
-
-    if(input == '/')
-    {
-        return DIVISION;
+        for (int i = 0; i < sizeof(sign) / sizeof(char); i++)
+        {
+            if(input == sign[i])
+            {
+                return id[i];
+            }
+        }
     }
 
     return ERROR_OP_NOT_FOUND;
