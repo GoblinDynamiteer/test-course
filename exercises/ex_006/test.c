@@ -107,16 +107,36 @@ void test_input_value(void)
     freopen("test/values.txt", "r", stdin);
 
     double value[] = {22.33, 1.3, -0.3, .4, .05};
-    int i = 0;
+    double test_val;
 
-    TEST_ASSERT_EQUAL_FLOAT(value[0], input_value());
-    TEST_ASSERT_EQUAL_FLOAT(value[1], input_value());
-    TEST_ASSERT_EQUAL_FLOAT(value[2], input_value());
-    TEST_ASSERT_EQUAL_FLOAT(value[3], input_value());
-    TEST_ASSERT_EQUAL_FLOAT(value[4], input_value());
+    TEST_ASSERT_TRUE(input_value(&test_val));
+    TEST_ASSERT_EQUAL_FLOAT(value[0], test_val);
 
-    TEST_ASSERT_EQUAL_FLOAT(0.0f, input_value());
-    TEST_ASSERT_EQUAL_FLOAT(0.0f, input_value());
+    TEST_ASSERT_TRUE(input_value(&test_val));
+    TEST_ASSERT_EQUAL_FLOAT(value[1], test_val);
+
+    TEST_ASSERT_TRUE(input_value(&test_val));
+    TEST_ASSERT_EQUAL_FLOAT(value[2], test_val);
+
+    TEST_ASSERT_TRUE(input_value(&test_val));
+    TEST_ASSERT_EQUAL_FLOAT(value[3], test_val);
+
+    TEST_ASSERT_TRUE(input_value(&test_val));
+    TEST_ASSERT_EQUAL_FLOAT(value[4], test_val);
+
+    /* letters a f */
+    TEST_ASSERT_FALSE(input_value(&test_val));
+    TEST_ASSERT_FALSE(input_value(&test_val));
+
+    freopen("test/string1.txt", "r", stdin);
+    TEST_ASSERT_FALSE(input_value(&test_val));
+
+    freopen("test/string2.txt", "r", stdin);
+    TEST_ASSERT_TRUE(input_value(&test_val));
+    TEST_ASSERT_EQUAL_FLOAT(13.4f, test_val);
+
+    freopen("test/string2.txt", "r", stdin);
+    TEST_ASSERT_FALSE(input_value(&test_val));
 }
 
 void test_get_operation_sign(void)

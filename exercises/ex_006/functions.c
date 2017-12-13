@@ -109,7 +109,7 @@ char get_operation_sign(operation_id id)
     return '0';
 }
 
-double input_value(void)
+bool input_value(double * val)
 {
     double d;
 

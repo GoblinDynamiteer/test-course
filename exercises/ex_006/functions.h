@@ -25,6 +25,6 @@ double operation_multiply(double a, double b);
 double operation_divide(double a, double b);
 operation_id input_operation(void);
 char get_operation_sign(operation_id id);
-double input_value(void);
+bool input_value(double * val);
 
 #endif
