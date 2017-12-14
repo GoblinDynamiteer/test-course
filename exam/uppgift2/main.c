@@ -1,6 +1,10 @@
 /**
- * Unity test template
- * main.c
+ * For Exam
+ * Test, verifiering och certifiering
+ * Mjukvaruutvecklare inbyggda system
+ * 2017-12-14
+ *
+ * By Johan Kampe
  */
 
 #include "functions.h"
@@ -29,6 +33,7 @@ int main(int argc, char const *argv[])
         printf("Number belongs to a %s\n",
             gender_name[check_gender(num)]);
 
+        printf("Age: %d\n", get_age(num));
         printf("Enter Y to enter a new number: ");
 
         if (!get_user_input_yes_no())

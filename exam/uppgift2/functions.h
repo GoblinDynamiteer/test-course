@@ -25,5 +25,6 @@ bool number_check(char * number);
 bool number_input(char * number);
 int check_gender(char * number);
 bool get_user_input_yes_no(void);
+int get_age(char * number);
 
 #endif

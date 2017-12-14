@@ -70,3 +70,24 @@ bool get_user_input_yes_no(void)
 
     return (tolower(input[0]) == 'y');
 }
+
+/**
+ * Get age of user
+ * @param  number Social sec number as string
+ * @return        Age
+ */
+int get_age(char * number)
+{
+    // Currently doesnt work for ppl born in the 2000s
+    char year_string[] = "1900";
+    int year;
+
+    for(int i = 0; i < 2; i++)
+    {
+        year_string[i + 2] = number[i];
+    }
+
+    sscanf(year_string, "%d", &year);
+
+    return (2017 - year);
+}

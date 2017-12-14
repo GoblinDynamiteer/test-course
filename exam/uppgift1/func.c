@@ -14,6 +14,10 @@ bool dht_checksum_correct(void)
     return (data[4] == ((data[0] + data[1] + data[2] + data[3]) & 0xFF));
 }
 
+/**
+ * Poll sensor data
+ * @return  Bits read
+ */
 uint8_t dht_poll_data(void)
 {
     int bits_read = 0;
@@ -63,6 +67,7 @@ uint8_t dht_poll_data(void)
     return bits_read;
 }
 
+/** Convert celcius to fahrenheit */
 float celcius_to_fahrenheit(float c)
 {
     return c * 1.8f + 32;
