@@ -14,7 +14,7 @@ UNITY_SRC = $(UNTIY_HOME)/src
 SRC_EXT = c
 OBJ_EXT = o
 EXE_EXT = exe
-APP_NAME = template
+APP_NAME = socialnum
 
 MAIN = main
 TEST = test
