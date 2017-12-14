@@ -1,7 +1,19 @@
+/**
+ * For Exam
+ * Test, verifiering och certifiering
+ * Mjukvaruutvecklare inbyggda system
+ * 2017-12-14
+ *
+ * By Johan Kampe
+ */
+
 #include "functions.h"
 #include "unity.h"
 #include <string.h>
 
+/**
+ * Tests for function number_check
+ */
 void test_number_check(void)
 {
     TEST_ASSERT_TRUE(number_check("8306191910"));
@@ -14,6 +26,9 @@ void test_number_check(void)
     TEST_ASSERT_FALSE(number_check("33-21"));
 }
 
+/**
+ * Tests for function test_check_gender
+ */
 void test_check_gender(void)
 {
     TEST_ASSERT_EQUAL_INT(GENDER_MALE, check_gender("8306191910"));
