@@ -1,3 +1,12 @@
+/**
+ * For Exam
+ * Test, verifiering och certifiering
+ * Mjukvaruutvecklare inbyggda system
+ * 2017-12-14
+ *
+ * By Johan Kampe
+ */
+
 #include "func.h"
 
 bool dht_checksum_correct(void)

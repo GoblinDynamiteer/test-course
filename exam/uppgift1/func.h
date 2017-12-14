@@ -1,3 +1,11 @@
+/**
+ * For Exam
+ * Test, verifiering och certifiering
+ * Mjukvaruutvecklare inbyggda system
+ * 2017-12-14
+ *
+ * By Johan Kampe
+ */
 
 #ifndef FUNC_H
 #define FUNC_H

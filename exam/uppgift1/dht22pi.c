@@ -1,9 +1,12 @@
-/*
-* dht.c:
-* read temperature and humidity from DHT11 or DHT22 sensor
-*/
+/**
+ * For Exam
+ * Test, verifiering och certifiering
+ * Mjukvaruutvecklare inbyggda system
+ * 2017-12-14
+ *
+ * By Johan Kampe
+ */
 
-//#include <wiringPi.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
@@ -19,7 +22,7 @@ int main(int argc, char const *argv[])
         exit(1);
     }
 
-    while(1)
+    while (1)
     {
         uint8_t bits_read = 0;
         data[0] = data[1] = data[2] = data[3] = data[4] = 0;

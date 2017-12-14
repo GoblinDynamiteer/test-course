@@ -1,8 +1,9 @@
+#For Exam
+#Test, verifiering och certifiering
+#Mjukvaruutvecklare inbyggda system
+#2017-12-14
 
-# Unity test template
-# makefile
-#
-# By Johan Kampe
+#By Johan Kampe
 
 CC = gcc
 ECHO = @echo
