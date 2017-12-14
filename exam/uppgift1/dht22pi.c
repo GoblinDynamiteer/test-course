@@ -8,37 +8,14 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <stdbool.h>
+#include "func.h"
 
-#define MAX_TIMINGS 85
-#define INPUT 1
-#define OUTPUT 2
-#define LOW 0
-#define HIGH 1
-
-
-/* stub/driver functions not fully developed yet
-void delay(int a){
-}
-
-void pinMode() {
-
-}
-
-int wiringPiSetup() {
-return 0;
-}
-
-void delayMicroseconds(int s1 ) {
-}
-
-int digitalRead(int a){
-return 0;
-}
-
-void digitalWrite(int a, int b){
-
-}
-*/
+#define MAX_TIMINGS     85
+#define INPUT           1
+#define OUTPUT          2
+#define LOW             0
+#define HIGH            1
+#define DHT_PIN         3
 
 int data[5] = { 0, 0, 0, 0, 0 };
 
@@ -53,9 +30,9 @@ int main(int argc, char const *argv[])
 
     while(1)
     {
-        uint8_t laststate   = HIGH;
-        uint8_t counter     = 0;
-        uint8_t j            = 0, i;
+        uint8_t laststate = HIGH;
+        uint8_t counter = 0;
+        uint8_t j = 0, i;
 
         data[0] = data[1] = data[2] = data[3] = data[4] = 0;
 
