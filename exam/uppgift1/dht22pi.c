@@ -10,15 +10,6 @@
 #include <stdbool.h>
 #include "func.h"
 
-#define MAX_TIMINGS     85
-#define INPUT           1
-#define OUTPUT          2
-#define LOW             0
-#define HIGH            1
-#define DHT_PIN         3
-
-int data[5] = { 0, 0, 0, 0, 0 };
-
 int main(int argc, char const *argv[])
 {
     printf("Raspberry Pi DHT11/DHT22 temperature/humidity test\n");
@@ -30,63 +21,16 @@ int main(int argc, char const *argv[])
 
     while(1)
     {
-        uint8_t laststate = HIGH;
-        uint8_t counter = 0;
-        uint8_t j = 0, i;
-
+        uint8_t bits_read = 0;
         data[0] = data[1] = data[2] = data[3] = data[4] = 0;
 
-        /* pull pin down for 18 milliseconds */
-        pinMode(DHT_PIN, OUTPUT);
-        digitalWrite(DHT_PIN, LOW);
-        delay(18);
-
-        /* prepare to read the pin */
-        pinMode(DHT_PIN, INPUT);
-
-        /* detect change and read data */
-        for (i = 0; i < MAX_TIMINGS; i++)
-        {
-            counter = 0;
-            while (digitalRead(DHT_PIN) == laststate)
-            {
-                counter++;
-                delayMicroseconds(1);
-
-                if (counter == 255)
-                {
-                    break;
-                }
-            }
-
-            laststate = digitalRead(DHT_PIN);
-
-            if (counter == 255)
-            {
-                break;
-            }
-
-            /* ignore first 3 transitions */
-            if ((i >= 4) && (i % 2 == 0))
-            {
-                /* shove each bit into the storage bytes */
-                data[j / 8] <<= 1;
-
-                if (counter > 16)
-                {
-                    data[j / 8] |= 1;
-                }
-
-                j++;
-            }
-        }
+        bits_read = dht_poll_data();
 
         /*
         * check we read 40 bits (8bit x 5 ) + verify checksum in the last byte
         * print it out if data is good
         */
-        if ((j >= 40) &&
-            (data[4] == ((data[0] + data[1] + data[2] + data[3]) & 0xFF)))
+        if ((bits_read >= 40) && dht_checksum_correct())
         {
             float h = (float)((data[0] << 8) + data[1]) / 10;
 
@@ -107,7 +51,8 @@ int main(int argc, char const *argv[])
                 c = -c;
             }
 
-            float f = c * 1.8f + 32;
+            float f = celcius_to_fahrenheit(c);
+
             printf("Humidity = %.1f %% Temperature = %.1f *C (%.1f *F)\n",
                 h, c, f);
         }
